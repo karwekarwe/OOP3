@@ -7,14 +7,6 @@
 
 using namespace std;
 
-/*struct Stud {
-    std::string vardas;
-    std::string pavarde;
-    std::vector<int> namuDarbai;
-    int egzaminas;
-    double galutinis;
-};*/
-
 class Stud {
 private:
     string vardas_, pavarde_;
@@ -22,7 +14,7 @@ private:
     double gal_;
     vector<int> namuDarbai_;
 public:
-    Stud() : egzaminas_(0) { }  // default konstruktorius
+    Stud() : egzaminas_(0), gal_(0) { }  // default konstruktorius
     Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal)
         : namuDarbai_(namuDarbai), vardas_(vardas), pavarde_(pavarde), egzaminas_(egzaminas), gal_(gal) {}
 
@@ -41,6 +33,7 @@ public:
     void setGal (double gal) {gal_ = gal;}
 
     void addND(int namuDarbai) { namuDarbai_.push_back(namuDarbai); }
+    void clearND() { namuDarbai_.clear(); }
 
 };
 

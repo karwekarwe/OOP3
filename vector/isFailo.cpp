@@ -16,69 +16,109 @@
 using namespace std;
 extern chrono::milliseconds totalTime;
 
-    void isFailo(const string& failPav, vector<Stud>& studentai) {
-        
-
+void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
     Stud naujasS;
-   auto startSkaitymas = chrono::steady_clock::now();
+    auto startSkaitymas = chrono::steady_clock::now();
 
     try {
-    ifstream failas(failPav);
-    if (!failas) {
-        throw runtime_error("Nepavyko atidaryti failo. isF");
-    }
-
-    
-
-    string line;
-    getline(failas, line); 
-
-     int baluCount = 0;
-
-    stringstream headerS(line);
-    string headerItem;
-    int headerItemC = 0;
-
-    while (headerS >> headerItem) {
-        headerItemC++;
-    }
-    baluCount = headerItemC - 3;
-
-
-    while (getline(failas, line)) {
-        stringstream stringBuferis(line);
-
-        string tempV, tempP;
-        int tempE;
-        vector <int> tempND;
-
-        stringBuferis >> tempV >> tempP;
-        naujasS.setVardas(tempV);
-        naujasS.setVardas(tempP);
-
-       // naujasS.setNamuDarbai().clear();
-        for (int i = 0; i < baluCount; ++i) {
-            int balas;
-            stringBuferis >> balas;
-            naujasS.addND(balas);
+        ifstream failas(failPav);
+        if (!failas) {
+            throw runtime_error("Nepavyko atidaryti failo. isF");
         }
 
-        stringBuferis >> tempE;
-        naujasS.setEgzaminas(tempE);
+        string line;
+        getline(failas, line); 
 
-        studentai.push_back(naujasS);
+        int baluCount = 0;
+
+        stringstream headerS(line);
+        string headerItem;
+
+    
+        while (headerS >> headerItem) {
+            baluCount++;
+        }
+        baluCount -= 3; 
+       
+        studentai.reserve(dyd); 
+
+        vector<string> lines;  
+        lines.reserve(dyd);    
+
+        // Read file line by line
+        while (getline(failas, line)) {
+            lines.push_back(line);
+
+            // Process lines in chunks
+            if (lines.size() >= dyd) { 
+              
+
+                for (const auto& bufferedLine : lines) {
+                    stringstream stringBuferis(bufferedLine);
+
+                    string tempV, tempP;
+                    int tempE;
+                    vector<int> tempND;
+
+                    stringBuferis >> tempV >> tempP;
+                    naujasS.setVardas(tempV);
+                    naujasS.setPavarde(tempP);
+
+                    // Clear the existing grades
+                    naujasS.clearND();
+
+                    for (int i = 0; i < baluCount; ++i) {
+                        int balas;
+                        stringBuferis >> balas;
+                        naujasS.addND(balas);
+                    }
+
+                    stringBuferis >> tempE;
+                    naujasS.setEgzaminas(tempE);
+
+                    studentai.push_back(naujasS);
+                }
+
+                // Clear buffer
+                lines.clear();
+            }
+        }
+
+        // Process remaining lines
+        for (const auto& remainingLine : lines) {
+            stringstream stringBuferis(remainingLine);
+
+            string tempV, tempP;
+            int tempE;
+            vector<int> tempND;
+
+            stringBuferis >> tempV >> tempP;
+            naujasS.setVardas(tempV);
+            naujasS.setPavarde(tempP);
+
+            // Clear the existing grades
+            naujasS.clearND();
+
+            for (int i = 0; i < baluCount; ++i) {
+                int balas;
+                stringBuferis >> balas;
+                naujasS.addND(balas);
+            }
+
+            stringBuferis >> tempE;
+            naujasS.setEgzaminas(tempE);
+
+            studentai.push_back(naujasS);
+        }
+
+        failas.close();
+    } catch (const runtime_error& e) {
+        cout << e.what() << endl;
     }
 
-    failas.close();
-   
-
-    } catch (const runtime_error& e) {
-    cout << e.what() << endl;
-}
-
-     auto endSkaitymas  = chrono::steady_clock::now(); 
-        auto elapsedSkaitymas  = chrono::duration_cast<chrono::milliseconds>(endSkaitymas  - startSkaitymas );
-        cout << failPav << "  Skaitymas uztruko: " << elapsedSkaitymas .count() << " milisekundes" << endl;
+    auto endSkaitymas = chrono::steady_clock::now(); 
+    auto elapsedSkaitymas = chrono::duration_cast<chrono::milliseconds>(endSkaitymas - startSkaitymas);
+    cout << failPav << "  Skaitymas uztruko: " << elapsedSkaitymas.count() << " milisekundes" << endl;
 totalTime += elapsedSkaitymas;
  
 
