@@ -17,10 +17,10 @@ using namespace std;
         
         gal = avg*0.4 + s.egzaminas*0.6;
 
-        return gal;
+        return gal;*/
     }
 
-        double mediana (Stud& s) {
+        double mediana (Stud& s) {/*
         double med = 0;
         double gal;
         sort(s.namuDarbai.begin(), s.namuDarbai.end());
@@ -32,10 +32,10 @@ using namespace std;
         }
         gal = med*0.4 + s.egzaminas*0.6;
 
-        return gal;
+        return gal;*/
     }
 
-    bool rusiavimas(const Stud& a, const Stud& b, char metPas) {
+    bool rusiavimas(const Stud& a, const Stud& b, char metPas) {/*
 
 try {
         metPas = toupper(metPas);
