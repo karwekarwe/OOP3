@@ -16,7 +16,7 @@
 using namespace std;
 extern chrono::milliseconds totalTime;
 
-    void isFailo(const string& failPav, vector<Stud>& studentai) {/*
+    void isFailo(const string& failPav, vector<Stud>& studentai) {
         
 
     Stud naujasS;
@@ -48,16 +48,23 @@ extern chrono::milliseconds totalTime;
     while (getline(failas, line)) {
         stringstream stringBuferis(line);
 
-        stringBuferis >> naujasS.vardas >> naujasS.pavarde;
+        string tempV, tempP;
+        int tempE;
+        vector <int> tempND;
 
-        naujasS.namuDarbai.clear();
+        stringBuferis >> tempV >> tempP;
+        naujasS.setVardas(tempV);
+        naujasS.setVardas(tempP);
+
+       // naujasS.setNamuDarbai().clear();
         for (int i = 0; i < baluCount; ++i) {
             int balas;
             stringBuferis >> balas;
-            naujasS.namuDarbai.push_back(balas);
+            naujasS.addND(balas);
         }
 
-        stringBuferis >> naujasS.egzaminas;
+        stringBuferis >> tempE;
+        naujasS.setEgzaminas(tempE);
 
         studentai.push_back(naujasS);
     }
@@ -83,12 +90,12 @@ while (true) {
         
         if (pasirinkimas == 'V' || pasirinkimas == 'v') {
             for (auto& studentas : studentai) {
-                studentas.galutinis = vidurkis(studentas); // galutinis i struct
+                studentas.setGal(vidurkis(studentas)); // galutinis i struct
             }
             break;
         } else if (pasirinkimas == 'M' || pasirinkimas == 'm') {
             for (auto& studentas : studentai) {
-                studentas.galutinis = mediana(studentas); // galutinis i struct
+                studentas.setGal(mediana(studentas)); // galutinis i struct
             }
             break;
         } else {
@@ -98,7 +105,7 @@ while (true) {
         cout << e.what() << endl;
     }
 }
-    */
+    
 
 }
 

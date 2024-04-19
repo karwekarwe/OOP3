@@ -14,7 +14,7 @@ using namespace std;
 extern chrono::milliseconds totalTime;
 
 
-void rusiavimasGen(const string& failPav, vector<Stud>& s) {
+void rusiavimasGen(const string& failPav, vector<Stud>& studentai) {
 
     auto startRus = chrono::steady_clock::now();
     
@@ -34,8 +34,8 @@ void rusiavimasGen(const string& failPav, vector<Stud>& s) {
         return;
     }
 
-copy_if(s.begin(), s.end(), back_inserter(luzeriukai), [](const Stud& student){return student.getGal() < 5.0; });
-    s.erase(remove_if(s.begin(), s.end(), [](const Stud& student) {return student.getGal() < 5.0; }), s.end());
+copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const Stud& student){return student.getGal() < 5.0; });
+    studentai.erase(remove_if(studentai.begin(), studentai.end(), [](const Stud& student) {return student.getGal() < 5.0; }), studentai.end());
 
 
             auto endRus = chrono::steady_clock::now(); 
@@ -64,7 +64,7 @@ copy_if(s.begin(), s.end(), back_inserter(luzeriukai), [](const Stud& student){r
 
 auto startIsved = chrono::steady_clock::now(); 
 
-    sort(s.begin(), s.end(), [&rusPas](const Stud& a, const Stud& b) {
+    sort(studentai.begin(), studentai.end(), [&rusPas](const Stud& a, const Stud& b) {
     return rusiavimas(a, b, rusPas);
   });
       sort(luzeriukai.begin(), luzeriukai.end(), [&rusPas](const Stud& a, const Stud& b) {
@@ -81,7 +81,7 @@ auto startIsved = chrono::steady_clock::now();
         for (const auto& studentas : luzeriukai){
             outputFileUnder<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
         }
-        for (const auto& studentas : s){
+        for (const auto& studentas : studentai){
             outputFileOver<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
         }        
 

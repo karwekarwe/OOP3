@@ -40,6 +40,8 @@ public:
     void setEgzaminas (int egzaminas) {egzaminas_ = egzaminas;}
     void setGal (double gal) {gal_ = gal;}
 
+    void addND(int namuDarbai) { namuDarbai_.push_back(namuDarbai); }
+
 };
 
 
