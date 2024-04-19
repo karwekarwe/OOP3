@@ -6,48 +6,50 @@
 using namespace std;
 
     
-    double vidurkis (Stud& s) {/*
+    double vidurkis (Stud& s) {
         double suma = 0;
         double avg = 0;
         double gal;
-        for (int balas : s.namuDarbai) {
+        const vector<int>& namuDarbai = s.getNamuDarbai();
+        for (int balas : namuDarbai) {
             suma+= balas;
         }
-        avg = suma / s.namuDarbai.size();
+        avg = suma / namuDarbai.size();
         
-        gal = avg*0.4 + s.egzaminas*0.6;
+        gal = avg*0.4 + s.getEgzaminas()*0.6;
 
-        return gal;*/
+        return gal;
     }
 
-        double mediana (Stud& s) {/*
+        double mediana (Stud& s) {
         double med = 0;
         double gal;
-        sort(s.namuDarbai.begin(), s.namuDarbai.end());
-        if (s.namuDarbai.size() % 2 == 0) {
-            med = (s.namuDarbai[s.namuDarbai.size() / 2 - 1] + s.namuDarbai[s.namuDarbai.size() / 2]) / 2.0;
+        const vector<int>& namuDarbai = s.getNamuDarbai();
+        sort(namuDarbai.begin(), namuDarbai.end());
+        if (namuDarbai.size() % 2 == 0) {
+            med = (namuDarbai[namuDarbai.size() / 2 - 1] + namuDarbai[namuDarbai.size() / 2]) / 2.0;
         }
         else {
-            med = s.namuDarbai[s.namuDarbai.size() / 2];
+            med = namuDarbai[namuDarbai.size() / 2];
         }
-        gal = med*0.4 + s.egzaminas*0.6;
+        gal = med*0.4 + s.getEgzaminas()*0.6;
 
-        return gal;*/
+        return gal;
     }
 
-    bool rusiavimas(const Stud& a, const Stud& b, char metPas) {/*
+    bool rusiavimas(const Stud& a, const Stud& b, char metPas) {
 
 try {
         metPas = toupper(metPas);
 
         if (metPas == 'V') {
-            return a.vardas < b.vardas;
+            return a.getVardas() < b.getVardas();
         }
         else if (metPas == 'P') {
-            return a.pavarde < b.pavarde;
+            return a.getPavarde() < b.getPavarde();
         }
         else if (metPas == 'G') {
-            return a.galutinis < b.galutinis;
+            return a.getGal() < b.getGal();
         }
         else {
             throw std::invalid_argument("Neteisinga įvestis.");
@@ -56,5 +58,5 @@ try {
     catch (const std::invalid_argument& e) {
         cerr << e.what() << endl;
         return false;
-    }*/
+    }
 }

@@ -10,7 +10,7 @@ using namespace std;
 
 chrono::milliseconds totalTime(0); 
 
-int main() {/*
+int main() {
 
 
     vector<Stud> studentai;
@@ -101,6 +101,6 @@ int main() {/*
 
     cout << "Visos programos veikimo laikas: " << totalTime.count() << " milisekundes" << endl;
 
-    return 0;*/
+    return 0;
 }
 
