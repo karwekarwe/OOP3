@@ -23,14 +23,14 @@ private:
     vector<int> namuDarbai_;
 public:
     Stud() : egzaminas_(0) { }  // default konstruktorius
-    Stud(const vector <int>& namuDarbai, const string& vardas, const string& pavarde, int egzaminas, double gal)
+    Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal)
         : namuDarbai_(namuDarbai), vardas_(vardas), pavarde_(pavarde), egzaminas_(egzaminas), gal_(gal) {}
 
     ~Stud() {}
 
-    const vector <int>& getNamuDarbai() const {return namuDarbai_;}
-    const string& getVardas() const {return vardas_;}
-    const string& getPavarde() const {return pavarde_;}
+    vector <int> getNamuDarbai() const {return namuDarbai_;}
+    string getVardas() const {return vardas_;}
+    string getPavarde() const {return pavarde_;}
     int getEgzaminas() const {return egzaminas_;}
     double getGal() const {return gal_;}
 

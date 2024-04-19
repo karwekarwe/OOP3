@@ -25,6 +25,7 @@ using namespace std;
         double med = 0;
         double gal;
         const vector<int>& namuDarbai = s.getNamuDarbai();
+        
         sort(namuDarbai.begin(), namuDarbai.end());
         if (namuDarbai.size() % 2 == 0) {
             med = (namuDarbai[namuDarbai.size() / 2 - 1] + namuDarbai[namuDarbai.size() / 2]) / 2.0;

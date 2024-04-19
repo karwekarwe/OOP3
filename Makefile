@@ -11,7 +11,7 @@ SRCDIRS = vector
 OBJDIRS = $(SRCDIRS:%=%/obj)
 
 # Executable names
-EXEC = va
+EXEC = v
 
 # Text file name
 TXTFILES = studentai1000.txt studentai10000.txt studentai100000.txt studentai1000000.txt studentai10000000.txt
