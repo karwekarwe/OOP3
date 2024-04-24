@@ -39,26 +39,13 @@ using namespace std;
         return gal;
     }
 
-    bool rusiavimas(const Stud& a, const Stud& b, char metPas) {
-
-try {
-        metPas = toupper(metPas);
-
-        if (metPas == 'V') {
-            return a.getVardas() < b.getVardas();
-        }
-        else if (metPas == 'P') {
-            return a.getPavarde() < b.getPavarde();
-        }
-        else if (metPas == 'G') {
-            return a.getGal() < b.getGal();
-        }
-        else {
-            throw std::invalid_argument("Neteisinga įvestis.");
-        }
-    } 
-    catch (const std::invalid_argument& e) {
-        cerr << e.what() << endl;
-        return false;
+    bool rusiavimasV(const Stud& a, const Stud& b) {
+        return a.getVardas() < b.getVardas();
     }
-}
+    bool rusiavimasP(const Stud& a, const Stud& b) {
+        return a.getPavarde() < b.getPavarde();
+    }
+    bool rusiavimasG(const Stud& a, const Stud& b) {
+        return a.getGal() > b.getGal();
+    }
+

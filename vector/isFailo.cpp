@@ -18,6 +18,9 @@ extern chrono::milliseconds totalTime;
 
 void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
     Stud naujasS;
+    string line;
+    int baluCount = 0;
+
     auto startSkaitymas = chrono::steady_clock::now();
 
     try {
@@ -26,33 +29,24 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
             throw runtime_error("Nepavyko atidaryti failo. isF");
         }
 
-        string line;
         getline(failas, line); 
-
-        int baluCount = 0;
 
         stringstream headerS(line);
         string headerItem;
 
-    
         while (headerS >> headerItem) {
             baluCount++;
         }
         baluCount -= 3; 
-       
         studentai.reserve(dyd); 
-
         vector<string> lines;  
         lines.reserve(dyd);    
 
-        // Read file line by line
         while (getline(failas, line)) {
             lines.push_back(line);
 
-            // Process lines in chunks
             if (lines.size() >= dyd) { 
               
-
                 for (const auto& bufferedLine : lines) {
                     stringstream stringBuferis(bufferedLine);
 
@@ -64,7 +58,7 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
                     naujasS.setVardas(tempV);
                     naujasS.setPavarde(tempP);
 
-                    // Clear the existing grades
+                  
                     naujasS.clearND();
 
                     for (int i = 0; i < baluCount; ++i) {
@@ -79,37 +73,11 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
                     studentai.push_back(naujasS);
                 }
 
-                // Clear buffer
+              
                 lines.clear();
             }
         }
 
-        // Process remaining lines
-        for (const auto& remainingLine : lines) {
-            stringstream stringBuferis(remainingLine);
-
-            string tempV, tempP;
-            int tempE;
-            vector<int> tempND;
-
-            stringBuferis >> tempV >> tempP;
-            naujasS.setVardas(tempV);
-            naujasS.setPavarde(tempP);
-
-            // Clear the existing grades
-            naujasS.clearND();
-
-            for (int i = 0; i < baluCount; ++i) {
-                int balas;
-                stringBuferis >> balas;
-                naujasS.addND(balas);
-            }
-
-            stringBuferis >> tempE;
-            naujasS.setEgzaminas(tempE);
-
-            studentai.push_back(naujasS);
-        }
 
         failas.close();
     } catch (const runtime_error& e) {

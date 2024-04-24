@@ -7,7 +7,6 @@
 #include <iterator>
 
 
-
 #include "student.h"
 #include "funkcijos.h"
 
@@ -49,7 +48,20 @@ copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const 
 
         char rusPas;
 
-        while (true) {
+             
+                cout << "Pasirinkite rikiavimo metoda (1 - vardas, 2 - pavarde, 3 - galutinis):" << endl;
+                cin >> rusPas;
+auto startIsved = chrono::steady_clock::now(); 
+
+                if (rusPas == '1') {
+                    sort(studentai.begin(), studentai.end(), rusiavimasV);
+                } else if (rusPas == '2') {
+                    sort(studentai.begin(), studentai.end(), rusiavimasP);
+                } else if (rusPas == '3') {
+                    sort(studentai.begin(), studentai.end(), rusiavimasG);
+                }
+
+   /*     while (true) {
             cout << "Pasirinkite rikiavimo metoda (V - vardas, P - pavarde, G - galutinis): ";
             cin >> rusPas;
             rusPas = toupper(rusPas);
@@ -63,20 +75,21 @@ copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const 
 
         }   
 
-auto startIsved = chrono::steady_clock::now(); 
 
     sort(studentai.begin(), studentai.end(), [&rusPas](const Stud& a, const Stud& b) {
     return rusiavimas(a, b, rusPas);
   });
-      sort(luzeriukai.begin(), luzeriukai.end(), [&rusPas](const Stud& a, const Stud& b) {
+    sort(luzeriukai.begin(), luzeriukai.end(), [&rusPas](const Stud& a, const Stud& b) {
     return rusiavimas(a, b, rusPas);
   });
-  
+  */
             auto endIsved = chrono::steady_clock::now(); 
             auto elapsedIsved = chrono::duration_cast<chrono::milliseconds>(endIsved - startIsved);
             cout << failPav << "Studentu rusiavimas didejimo tvarka konteineryje (funkcija sort) uztruko: " << elapsedIsved.count() << "  milisekundes" << endl;
     
                totalTime += elapsedIsved;
+
+
 
 
         for (const auto& studentas : luzeriukai){
@@ -86,6 +99,7 @@ auto startIsved = chrono::steady_clock::now();
             outputFileOver<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
         }        
 
-
+outputFileUnder.close();
+outputFileOver.close();
 
 }

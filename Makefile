@@ -21,11 +21,11 @@ all: $(EXEC)
 
 # Build targets for each version of the program
 v: vector/1.1main.o vector/isFailo.o vector/rusiavimasGen.o vector/papFunkcijos.o vector/failuGen.o 
-	$(CC) $(CFLAGS) -O2 $^ -o $@
+	$(CC) $(CFLAGS) -O3 $^ -o $@
 
 # Build rule for object files in each directory
 %/obj/%.o: %/%.cpp %/funkcijos.h %/student.h
-	$(CC) $(CFLAGS) -O2 -c $< -o $@
+	$(CC) $(CFLAGS) -O3 -c $< -o $@
 
 # Rule to copy the text file to the current directory
 $(TXTFILES):
