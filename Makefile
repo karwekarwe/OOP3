@@ -1,37 +1,21 @@
-# Compiler
 CC = g++
+CFLAGS = -Wall -std=c++17
 
-# Compiler flags
-CFLAGS = -std=c++11 -Wall
+.PHONY: all clean
 
-# Source directories
-SRCDIRS = vector
+all: v0 v1 v2 v3
 
-# Object directories
-OBJDIRS = $(SRCDIRS:%=%/obj)
+v0: vector/1.1main.cpp vector/failuGen.cpp vector/isFailo.cpp vector/papFunkcijos.cpp vector/rusiavimasGen.cpp vector/student.h vector/funkcijos.h
+	$(CC) $^ -o $@
 
-# Executable names
-EXEC = v
+v1: vector/1.1main.cpp vector/failuGen.cpp vector/isFailo.cpp vector/papFunkcijos.cpp vector/rusiavimasGen.cpp vector/student.h vector/funkcijos.h
+	$(CC) $(CFLAGS) -O1 $^ -o $@
 
-# Text file name
-TXTFILES = studentai1000.txt studentai10000.txt studentai100000.txt studentai1000000.txt studentai10000000.txt
+v2: vector/1.1main.cpp vector/failuGen.cpp vector/isFailo.cpp vector/papFunkcijos.cpp vector/rusiavimasGen.cpp vector/student.h vector/funkcijos.h
+	$(CC) $(CFLAGS) -O2 $^ -o $@
 
-# Default target
-all: $(EXEC)
-
-# Build targets for each version of the program
-v: vector/1.1main.o vector/isFailo.o vector/rusiavimasGen.o vector/papFunkcijos.o vector/failuGen.o 
+v3: vector/1.1main.cpp vector/failuGen.cpp vector/isFailo.cpp vector/papFunkcijos.cpp vector/rusiavimasGen.cpp vector/student.h vector/funkcijos.h
 	$(CC) $(CFLAGS) -O3 $^ -o $@
 
-# Build rule for object files in each directory
-%/obj/%.o: %/%.cpp %/funkcijos.h %/student.h
-	$(CC) $(CFLAGS) -O3 -c $< -o $@
-
-# Rule to copy the text file to the current directory
-$(TXTFILES):
-	cp $@ $(foreach exec,$(EXEC),$(dir $(exec)))
-
-# Clean command
 clean:
-	rm -f $(foreach dir,$(OBJDIRS),$(wildcard $(dir)/*.o))
-	rm -f $(EXEC)
+	rm -f v0 v1 v2 v3
