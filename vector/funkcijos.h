@@ -13,4 +13,5 @@ void ranka(std::vector<Stud>& studentai);
 bool rusiavimasV(const Stud& a, const Stud& b);
 bool rusiavimasP(const Stud& a, const Stud& b);
 bool rusiavimasG(const Stud& a, const Stud& b);
+void testai();
 #endif 

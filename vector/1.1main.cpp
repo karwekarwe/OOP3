@@ -108,6 +108,8 @@ int main() {
 
             
                 }
+                testai();
+
 
         } catch (const invalid_argument& e) {
             cout << "Klaida: " << e.what() << " Prašome įvesti tinkamą pasirinkimą.\n";
