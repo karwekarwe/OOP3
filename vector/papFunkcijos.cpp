@@ -3,6 +3,8 @@
 #include <vector>
 #include <algorithm>
 #include <cassert>
+#include <fstream>
+#include <iomanip>
 
 
 using namespace std;
@@ -87,4 +89,38 @@ using namespace std;
     assert(s3.getGal() == 0.0);
 
     cout << "Testai sekmingi" <<endl;
+    }
+
+void isvedimas_i_ekrana(const vector<Stud>& luzeriukai, const vector<Stud>& studentai) {
+        cout << "Luzeriukai:" << endl;
+    for (const auto& studentas : luzeriukai) {
+        cout << studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+    }
+    cout << "Intelektualai:" << endl;
+    for (const auto& studentas : studentai) {
+        cout << studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+    }
+}
+
+
+void isvedimas_i_faila(const vector<Stud>& luzeriukai, const vector<Stud>& studentai, const string& failPav) {
+     ofstream outputFileUnder("luzeriukai " + failPav);
+    if (!outputFileUnder.is_open()) {
+        cerr << "Nepavyko sukurti naujo failo. outputFileUnder" << endl;
+        return;
+    }
+    ofstream outputFileOver("intelektualai " + failPav);
+    if (!outputFileOver.is_open()) {
+        cerr << "Nepavyko sukurti naujo failo. outputFileOver" << endl;
+        return;
+    }
+        for (const auto& studentas : luzeriukai){
+            outputFileUnder<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+        }
+        for (const auto& studentas : studentai){
+            outputFileOver<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+        } 
+
+        outputFileUnder.close();
+        outputFileOver.close();
     }

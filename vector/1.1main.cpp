@@ -15,6 +15,8 @@ int main() {
 
     vector<Stud> studentai;
     string failPav;
+    vector<Stud> luzeriukai;
+
 
 
         try {
@@ -71,7 +73,7 @@ int main() {
                     }
                     cout << "Failas sugeneruotas." << endl;
                     isFailo(failPav, studentai, dyd); 
-                    rusiavimasGen(failPav, studentai); 
+                    rusiavimasGen(failPav, studentai, luzeriukai); 
   
 
                 }
@@ -103,7 +105,20 @@ int main() {
                     }
 
                     isFailo(failPav, studentai, dyd); 
-                    rusiavimasGen(failPav, studentai); 
+                    rusiavimasGen(failPav, studentai, luzeriukai); 
+                }
+
+                char isvestis;
+                cout << "Kaip isvesti rezultatus? 1 - i faila. 2 - i ekrana" << endl;
+                cin >> isvestis;
+
+                if (isvestis == '1'){
+                isvedimas_i_faila(luzeriukai, studentai, failPav);
+
+                }
+                else if (isvestis == '2'){
+                isvedimas_i_ekrana(luzeriukai, studentai);
+
                 }
 
             

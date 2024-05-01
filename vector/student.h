@@ -73,6 +73,33 @@ public:
     void addND(int namuDarbai) { namuDarbai_.push_back(namuDarbai); }
     void clearND() { namuDarbai_.clear(); }
 
+  // Input Operator
+friend std::istream& operator>>(std::istream& i, Stud& stud) {
+    i >> stud.vardas_ >> stud.pavarde_;
+    int numGrades;
+    i >> numGrades;
+    stud.namuDarbai_.resize(numGrades);
+    for (int j = 0; j < numGrades; ++j) {
+        i >> stud.namuDarbai_[j];
+    }
+    i >> stud.egzaminas_;
+    return i;
+}
+
+// Output Operator
+friend std::ostream& operator<<(std::ostream& os, const Stud& stud) {
+    os << "Vardas: " << stud.vardas_ << "\n"
+       << "Pavarde: " << stud.pavarde_ << "\n";
+    os << "Namu darbai: ";
+    for (int balas : stud.namuDarbai_) {
+        os << balas << " ";
+    }
+    os << "\nEgzaminas: " << stud.egzaminas_ << "\n";
+    return os;
+}
+
+
+
 };
 
 

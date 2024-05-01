@@ -14,16 +14,16 @@ using namespace std;
 extern chrono::milliseconds totalTime;
 
 
-void rusiavimasGen(const string& failPav, vector<Stud>& studentai) {
+void rusiavimasGen(const string& failPav, vector<Stud>& studentai, vector<Stud>& luzeriukai) {
 
     auto startRus = chrono::steady_clock::now();
     
 
-    vector<Stud> luzeriukai;
+  //  vector<Stud> luzeriukai;
 
 
 
-    ofstream outputFileUnder("luzeriukai " + failPav);
+ /*   ofstream outputFileUnder("luzeriukai " + failPav);
     if (!outputFileUnder.is_open()) {
         cerr << "Nepavyko sukurti naujo failo. outputFileUnder" << endl;
         return;
@@ -32,7 +32,7 @@ void rusiavimasGen(const string& failPav, vector<Stud>& studentai) {
     if (!outputFileOver.is_open()) {
         cerr << "Nepavyko sukurti naujo failo. outputFileOver" << endl;
         return;
-    }
+    }*/
 
 copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const Stud& student){return student.getGal() < 5.0; });
     studentai.erase(remove_if(studentai.begin(), studentai.end(), [](const Stud& student) {return student.getGal() < 5.0; }), studentai.end());
@@ -51,38 +51,20 @@ copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const 
              
                 cout << "Pasirinkite rikiavimo metoda (1 - vardas, 2 - pavarde, 3 - galutinis):" << endl;
                 cin >> rusPas;
-auto startIsved = chrono::steady_clock::now(); 
+                auto startIsved = chrono::steady_clock::now(); 
 
                 if (rusPas == '1') {
                     sort(studentai.begin(), studentai.end(), rusiavimasV);
+                    sort(luzeriukai.begin(), luzeriukai.end(), rusiavimasV);
                 } else if (rusPas == '2') {
                     sort(studentai.begin(), studentai.end(), rusiavimasP);
+                    sort(luzeriukai.begin(), luzeriukai.end(), rusiavimasP);
                 } else if (rusPas == '3') {
                     sort(studentai.begin(), studentai.end(), rusiavimasG);
+                    sort(luzeriukai.begin(), luzeriukai.end(), rusiavimasG);
                 }
 
-   /*     while (true) {
-            cout << "Pasirinkite rikiavimo metoda (V - vardas, P - pavarde, G - galutinis): ";
-            cin >> rusPas;
-            rusPas = toupper(rusPas);
 
-            if (rusPas != 'V' && rusPas != 'P' && rusPas != 'G') {
-                cout << "Neteisinga įvestis" << endl;
-            }
-            else {
-                break;
-            }
-
-        }   
-
-
-    sort(studentai.begin(), studentai.end(), [&rusPas](const Stud& a, const Stud& b) {
-    return rusiavimas(a, b, rusPas);
-  });
-    sort(luzeriukai.begin(), luzeriukai.end(), [&rusPas](const Stud& a, const Stud& b) {
-    return rusiavimas(a, b, rusPas);
-  });
-  */
             auto endIsved = chrono::steady_clock::now(); 
             auto elapsedIsved = chrono::duration_cast<chrono::milliseconds>(endIsved - startIsved);
             cout << failPav << "Studentu rusiavimas didejimo tvarka konteineryje (funkcija sort) uztruko: " << elapsedIsved.count() << "  milisekundes" << endl;
@@ -92,7 +74,7 @@ auto startIsved = chrono::steady_clock::now();
 
 
 
-        for (const auto& studentas : luzeriukai){
+ /*      for (const auto& studentas : luzeriukai){
             outputFileUnder<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
         }
         for (const auto& studentas : studentai){
@@ -100,6 +82,6 @@ auto startIsved = chrono::steady_clock::now();
         }        
 
 outputFileUnder.close();
-outputFileOver.close();
+outputFileOver.close();*/ 
 
 }
