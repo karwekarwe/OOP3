@@ -8,28 +8,46 @@
 
 using namespace std;
 
-class Stud {
+class Zmogus {
+    protected:
+
+    string vardas_;
+    string pavarde_;
+
+   
+    Zmogus() = default;
+    Zmogus(const string& vardas, const string& pavarde)
+    : vardas_(vardas), pavarde_(pavarde) {}
+    virtual ~Zmogus() {}
+    
+ public:
+    virtual string getVardas() const {return vardas_;}
+    virtual string getPavarde() const {return pavarde_;}
+    virtual void setVardas(const string& vardas) {vardas_ = vardas;}
+    virtual void setPavarde(const string& pavarde) {pavarde_ = pavarde;}
+
+};
+
+class Stud : public Zmogus {
 private:
-    string vardas_, pavarde_;
     int egzaminas_, ndcount_;
     double gal_;
     vector<int> namuDarbai_;
 public:
     Stud() : egzaminas_(0), gal_(0), ndcount_(0) { }  // default konstruktorius
     Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal, int ndcount)
-        : namuDarbai_(namuDarbai), vardas_(vardas), pavarde_(pavarde), egzaminas_(egzaminas), gal_(gal), ndcount_(ndcount) {}
+        : Zmogus(vardas, pavarde), namuDarbai_(namuDarbai), egzaminas_(egzaminas), gal_(gal), ndcount_(ndcount) {}
 
     ~Stud() {}
 
     // Copy constructor
     Stud(const Stud& other)
-        : vardas_(other.vardas_), pavarde_(other.pavarde_),  egzaminas_(other.egzaminas_),  gal_(other.gal_),  namuDarbai_(other.namuDarbai_), ndcount_(other.ndcount_) {}
+        : Zmogus(other.vardas_, other.pavarde_),  egzaminas_(other.egzaminas_),  gal_(other.gal_),  namuDarbai_(other.namuDarbai_), ndcount_(other.ndcount_) {}
 
     // Copy assignment operator
     Stud& operator=(const Stud& other) {// copy assignment
         if (this != &other) {
-            vardas_ = other.vardas_;
-            pavarde_ = other.pavarde_;
+            Zmogus::operator=(other);
             egzaminas_ = other.egzaminas_;
             gal_ = other.gal_;
             namuDarbai_ = other.namuDarbai_;
@@ -40,14 +58,13 @@ public:
 
     // Move constructor
     Stud(Stud&& other) noexcept // move constructor
-        : vardas_(move(other.vardas_)), pavarde_(move(other.pavarde_)), egzaminas_(other.egzaminas_), gal_(other.gal_), namuDarbai_(move(other.namuDarbai_)), ndcount_(move(other.ndcount_)){
+        : Zmogus(move(other.vardas_), move(other.pavarde_)), egzaminas_(other.egzaminas_), gal_(other.gal_), namuDarbai_(move(other.namuDarbai_)), ndcount_(move(other.ndcount_)){
         other.ndcount_ = 0;}
     // Move assignment operator
 
     Stud& operator=(Stud&& other) noexcept { // move assignment
         if (this != &other) {
-            vardas_ = move(other.vardas_);
-            pavarde_ = move(other.pavarde_);
+            Zmogus::operator=(move(other));
             egzaminas_ = move(other.egzaminas_);
             gal_ = move(other.gal_);
             namuDarbai_ = move(other.namuDarbai_);
@@ -60,16 +77,12 @@ public:
 
     // getteriai
     vector <int> getNamuDarbai() const {return namuDarbai_;}
-    string getVardas() const {return vardas_;}
-    string getPavarde() const {return pavarde_;}
     int getEgzaminas() const {return egzaminas_;}
     double getGal() const {return gal_;}
     int getNdcount() const {return ndcount_;}
 
     //setteriai
     void setNamuDarbai(const vector <int>& namuDarbai) {namuDarbai_ = namuDarbai;}
-    void setVardas(const string& vardas) {vardas_ = vardas;}
-    void setPavarde(const string& pavarde) {pavarde_ = pavarde;}
     void setEgzaminas (int egzaminas) {egzaminas_ = egzaminas;}
     void setGal (double gal) {gal_ = gal;}
     void setNdcount (int ndcount) {ndcount_ = ndcount;}
