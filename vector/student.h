@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 using namespace std;
 
@@ -93,13 +94,7 @@ friend std::istream& operator>>(std::istream& is, Stud& stud) {
 
 // Output Operator
 friend std::ostream& operator<<(std::ostream& os, const Stud& stud) {
-    os << "Vardas: " << stud.vardas_ << "\n"
-       << "Pavarde: " << stud.pavarde_ << "\n";
-    os << "Namu darbai: ";
-    for (int balas : stud.namuDarbai_) {
-        os << balas << " ";
-    }
-    os << "\nEgzaminas: " << stud.egzaminas_ << "\n";
+    os << stud.vardas_ << setw(20) << stud.pavarde_ << setw(20) << stud.gal_ << setw(20) << "\n";
     return os;
 }
 

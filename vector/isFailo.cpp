@@ -53,26 +53,6 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
                     stringstream stringBuferis(bufferedLine);
                      naujasS.setNdcount(baluCount);
                    stringBuferis >> naujasS;
-                 /*  string tempV, tempP;
-                    int tempE;
-                    vector<int> tempND;
-
-                    stringBuferis >> tempV >> tempP;
-                    naujasS.setVardas(tempV);
-                    naujasS.setPavarde(tempP);
-
-                  
-                    naujasS.clearND();
-
-                    for (int i = 0; i < baluCount; ++i) {
-                        int balas;
-                        stringBuferis >> balas;
-                        naujasS.addND(balas);
-                    }
-
-                    stringBuferis >> tempE;
-                    naujasS.setEgzaminas(tempE); 
-              */
 
                     studentai.push_back(naujasS);
                 }

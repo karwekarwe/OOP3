@@ -100,11 +100,11 @@ using namespace std;
 void isvedimas_i_ekrana(const vector<Stud>& luzeriukai, const vector<Stud>& studentai) {
         cout << "Luzeriukai:" << endl;
     for (const auto& studentas : luzeriukai) {
-        cout << studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+            cout << studentas;
     }
     cout << "Intelektualai:" << endl;
     for (const auto& studentas : studentai) {
-        cout << studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+            cout << studentas;
     }
 }
 
@@ -121,10 +121,10 @@ void isvedimas_i_faila(const vector<Stud>& luzeriukai, const vector<Stud>& stude
         return;
     }
         for (const auto& studentas : luzeriukai){
-            outputFileUnder<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
-        }
+            outputFileUnder << studentas;
+        }   
         for (const auto& studentas : studentai){
-            outputFileOver<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
+            outputFileOver << studentas;
         } 
 
         outputFileUnder.close();
