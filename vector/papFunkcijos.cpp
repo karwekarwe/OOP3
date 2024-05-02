@@ -59,12 +59,13 @@ using namespace std;
     vector<int> nd = {1, 2, 3};
     std::string vardas = "John";
     std::string pavarde = "Doe";
-    Stud s2(nd, vardas, pavarde, 0, 0.0);
+    Stud s2(nd, vardas, pavarde, 0, 0.0, 3);
     assert(s2.getVardas() == "John");
     assert(s2.getPavarde() == "Doe");
     assert(s2.getNamuDarbai() == nd);
     assert(s2.getEgzaminas() == 0);
     assert(s2.getGal() == 0.0);
+    assert(s2.getNdcount() == 3);
 
         // copy contruct
     Stud s3 = s2;
@@ -73,6 +74,8 @@ using namespace std;
     assert(s3.getNamuDarbai() == nd);
     assert(s3.getEgzaminas() == 0);
     assert(s3.getGal() == 0.0);
+    assert(s3.getNdcount() == 3);
+
 
         // moce constr
 
@@ -82,11 +85,14 @@ using namespace std;
     assert(s4.getNamuDarbai() == nd);
     assert(s4.getEgzaminas() == 0);
     assert(s4.getGal() == 0.0);
+    assert(s4.getNdcount() == 3);
+
     assert(s3.getVardas().empty());
     assert(s3.getPavarde().empty());
     assert(s3.getNamuDarbai().empty());
     assert(s3.getEgzaminas() == 0);
     assert(s3.getGal() == 0.0);
+    assert(s3.getNdcount() == 0);
 
     cout << "Testai sekmingi" <<endl;
     }

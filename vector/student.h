@@ -10,19 +10,19 @@ using namespace std;
 class Stud {
 private:
     string vardas_, pavarde_;
-    int egzaminas_;
+    int egzaminas_, ndcount_;
     double gal_;
     vector<int> namuDarbai_;
 public:
-    Stud() : egzaminas_(0), gal_(0) { }  // default konstruktorius
-    Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal)
-        : namuDarbai_(namuDarbai), vardas_(vardas), pavarde_(pavarde), egzaminas_(egzaminas), gal_(gal) {}
+    Stud() : egzaminas_(0), gal_(0), ndcount_(0) { }  // default konstruktorius
+    Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal, int ndcount)
+        : namuDarbai_(namuDarbai), vardas_(vardas), pavarde_(pavarde), egzaminas_(egzaminas), gal_(gal), ndcount_(ndcount) {}
 
     ~Stud() {}
 
     // Copy constructor
     Stud(const Stud& other)
-        : vardas_(other.vardas_), pavarde_(other.pavarde_),  egzaminas_(other.egzaminas_),  gal_(other.gal_),  namuDarbai_(other.namuDarbai_) {}
+        : vardas_(other.vardas_), pavarde_(other.pavarde_),  egzaminas_(other.egzaminas_),  gal_(other.gal_),  namuDarbai_(other.namuDarbai_), ndcount_(other.ndcount_) {}
 
     // Copy assignment operator
     Stud& operator=(const Stud& other) {// copy assignment
@@ -31,15 +31,16 @@ public:
             pavarde_ = other.pavarde_;
             egzaminas_ = other.egzaminas_;
             gal_ = other.gal_;
-            namuDarbai_ = other.namuDarbai_;    
+            namuDarbai_ = other.namuDarbai_;
+            ndcount_ = other.ndcount_;    
         }
         return *this;
     }
 
     // Move constructor
     Stud(Stud&& other) noexcept // move constructor
-        : vardas_(move(other.vardas_)), pavarde_(move(other.pavarde_)), egzaminas_(other.egzaminas_), gal_(other.gal_), namuDarbai_(move(other.namuDarbai_)) {}
-
+        : vardas_(move(other.vardas_)), pavarde_(move(other.pavarde_)), egzaminas_(other.egzaminas_), gal_(other.gal_), namuDarbai_(move(other.namuDarbai_)), ndcount_(move(other.ndcount_)){
+        other.ndcount_ = 0;}
     // Move assignment operator
 
     Stud& operator=(Stud&& other) noexcept { // move assignment
@@ -49,6 +50,7 @@ public:
             egzaminas_ = move(other.egzaminas_);
             gal_ = move(other.gal_);
             namuDarbai_ = move(other.namuDarbai_);
+            ndcount_ = move(other.ndcount_);
         }
         return *this;
     }
@@ -61,6 +63,7 @@ public:
     string getPavarde() const {return pavarde_;}
     int getEgzaminas() const {return egzaminas_;}
     double getGal() const {return gal_;}
+    int getNdcount() const {return ndcount_;}
 
     //setteriai
     void setNamuDarbai(const vector <int>& namuDarbai) {namuDarbai_ = namuDarbai;}
@@ -68,22 +71,24 @@ public:
     void setPavarde(const string& pavarde) {pavarde_ = pavarde;}
     void setEgzaminas (int egzaminas) {egzaminas_ = egzaminas;}
     void setGal (double gal) {gal_ = gal;}
+    void setNdcount (int ndcount) {ndcount_ = ndcount;}
 
     //kiti
     void addND(int namuDarbai) { namuDarbai_.push_back(namuDarbai); }
     void clearND() { namuDarbai_.clear(); }
 
   // Input Operator
-friend std::istream& operator>>(std::istream& i, Stud& stud) {
-    i >> stud.vardas_ >> stud.pavarde_;
-    int numGrades;
-    i >> numGrades;
-    stud.namuDarbai_.resize(numGrades);
-    for (int j = 0; j < numGrades; ++j) {
-        i >> stud.namuDarbai_[j];
+friend std::istream& operator>>(std::istream& is, Stud& stud) {
+    is >> stud.vardas_ >> stud.pavarde_;
+    stud.namuDarbai_.clear(); 
+    int balas;
+    for (int i = 0; i < stud.getNdcount(); ++i) {
+        is >> balas;
+        stud.namuDarbai_.push_back(balas);
     }
-    i >> stud.egzaminas_;
-    return i;
+    
+    is >> stud.egzaminas_;
+    return is;
 }
 
 // Output Operator
@@ -101,8 +106,6 @@ friend std::ostream& operator<<(std::ostream& os, const Stud& stud) {
 
 
 };
-
-
 
 
 #endif

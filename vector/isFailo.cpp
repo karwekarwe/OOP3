@@ -17,6 +17,7 @@ using namespace std;
 extern chrono::milliseconds totalTime;
 
 void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
+
     Stud naujasS;
     string line;
     int baluCount = 0;
@@ -48,9 +49,11 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
             if (lines.size() >= dyd) { 
               
                 for (const auto& bufferedLine : lines) {
+                           
                     stringstream stringBuferis(bufferedLine);
-
-                    string tempV, tempP;
+                     naujasS.setNdcount(baluCount);
+                   stringBuferis >> naujasS;
+                 /*  string tempV, tempP;
                     int tempE;
                     vector<int> tempND;
 
@@ -68,12 +71,12 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
                     }
 
                     stringBuferis >> tempE;
-                    naujasS.setEgzaminas(tempE);
+                    naujasS.setEgzaminas(tempE); 
+              */
 
                     studentai.push_back(naujasS);
                 }
 
-              
                 lines.clear();
             }
         }
