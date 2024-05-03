@@ -12,8 +12,6 @@ chrono::milliseconds totalTime(0);
 
 int main() {
 
-    Zmogus zmogus("John", "Doe");
-    
     vector<Stud> studentai;
     string failPav;
     vector<Stud> luzeriukai;
