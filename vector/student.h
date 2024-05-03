@@ -35,9 +35,9 @@ private:
     vector<int> namuDarbai_;
 public:
     Stud() : egzaminas_(0), gal_(0), ndcount_(0) { }  // default konstruktorius
-  // Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal, int ndcount)
+   //Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal, int ndcount)
    //     : Zmogus(vardas, pavarde),namuDarbai_(namuDarbai), egzaminas_(egzaminas), gal_(gal), ndcount_(ndcount) {}
-    Stud(const string& vardas, const string& pavarde) : Zmogus(vardas, pavarde), egzaminas_(0), ndcount_(0), gal_(0.0){}
+   Stud(const string& vardas, const string& pavarde) : Zmogus(vardas, pavarde), egzaminas_(0), ndcount_(0), gal_(0.0){}
 
 
     ~Stud() {namuDarbai_.clear(); vardas_.clear(), pavarde_.clear();}
@@ -61,11 +61,10 @@ public:
     }
 
     // Move constructor
-    Stud(Stud&& other) noexcept
-        : Zmogus(move(other.vardas_), move(other.pavarde_)), egzaminas_(move(other.egzaminas_)), gal_(move(other.gal_)), namuDarbai_(move(other.namuDarbai_)), ndcount_(move(other.ndcount_)){
-            other.vardas_.clear();
-            other.pavarde_.clear();
-}
+    Stud(Stud&& other) noexcept 
+        : Zmogus(move(other.vardas_), move(other.pavarde_)), egzaminas_(other.egzaminas_), gal_(other.gal_), namuDarbai_(move(other.namuDarbai_)), ndcount_(move(other.ndcount_)){
+        other.vardas_.empty(); other.pavarde_.empty(); other.ndcount_ = 0;  other.egzaminas_ = 0; other.gal_ = 0; other.namuDarbai_.empty();}// cia ir kiti =0
+
     // Move assignment operator
     Stud& operator=(Stud&& other) noexcept { 
         if (this != &other) {
@@ -78,6 +77,7 @@ public:
 
             other.vardas_.clear();
             other.pavarde_.clear();
+            other.vardas_.empty(); other.pavarde_.empty(); other.ndcount_ = 0;  other.egzaminas_ = 0; other.gal_ = 0; other.namuDarbai_.empty();
         }
         return *this;
     }
