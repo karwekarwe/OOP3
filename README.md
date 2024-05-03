@@ -23,4 +23,5 @@
      - Rikiavimo metodas: vardas / pavardė / galutinis
      - Išvestis į failą ar ekraną.
 
-
++ testai
++ dokumentacija HTML/TEX formatais.
