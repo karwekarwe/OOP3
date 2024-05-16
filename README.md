@@ -23,5 +23,33 @@
      - Rikiavimo metodas: vardas / pavardė / galutinis
      - Išvestis į failą ar ekraną.
 
+# Programos versijos:
+## v0.1
++ Studento galutinio balo skaičiavimas pagal vidurkį arba medianą
++ std::vector / C masyvai
++ struct Stud
+## v0.2
++ Duomenys nuskaitomi iš failo
+## v0.3
++ header (*.h) failai
++ Išimčių valdymas
+## v0.4
++ Studentų sarašų failų generavimas
++ Studentų rūšiavimas į dvi grupes pagal galutinį balą
++ Programos veikimo greičio (spartos) analizė
+## v1.0
++ Trys programos versijos: std::vector,  std::list,  std::deque
++ Optimizuotas studentų rūšiavimas (dalijimas) į dvi kategorijas
+## v1.1
++ Class Stud versija
++ Struct ir Class versijų palyginimas
+## v1.2
++ Pritaikyta Rule of five
+## v1.5
++ Sukurta bazinė klasė Zmogus, iš kurios išvesta klasė Stud
+## v2.0
++ Realizuoti ir demonstruojami unit test testai
++ Klasę aprašanti dokumentacija HTML/TEX formatais
+
 + testai
 + dokumentacija HTML/TEX formatais.
