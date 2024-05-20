@@ -56,11 +56,11 @@ using namespace std;
     void testai(){
 
         // constructor
-   // vector<int> nd = {1, 2, 2};
+    vector<int> nd = {1, 2, 3};
     std::string vardas = "John";
     std::string pavarde = "Doe";
-    //Stud s2(nd, vardas, pavarde, 3, 3.3, 3);
-    Stud s2(vardas, pavarde);
+    Stud s2(nd, vardas, pavarde, 3, 3.3, 3);
+    //Stud s2(vardas, pavarde);
     assert(s2.getVardas() == "John");
     assert(s2.getPavarde() == "Doe");
     assert(s2.getNamuDarbai().empty());
