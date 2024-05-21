@@ -1,6 +1,6 @@
 # README
 
-# v2.0
+# v3.0
 
 ## Paleisties proceso instrukcija:
 
@@ -50,3 +50,7 @@
 ## v2.0
 + Realizuoti ir demonstruojami unit test testai (Catch - [https://github.com/catchorg/Catch2/releases/tag/v3.6.0?fbclid=IwZXh0bgNhZW0CMTEAAR22tR50_uOfmSpIaDAg-vh1J6x_Vx8HP37CkzBrw8thoaoX5rqA3GqSxuI_aem_AQ2dqup3Bzkw-VMJZk7ygzB1di_IcHDSQ3fv-AiWsivb2Z2UqpWUYVYC1sEDRIGEkJk_zpuSw3frjTqTHAp6pkB1](https://github.com/catchorg/Catch2/releases/tag/v3.6.0))
 + Klasę aprašanti dokumentacija HTML/TEX formatais - https://www.doxygen.nl/manual/index.html
+## v3.0
++ sukurtas Vector konteineris
++ Vector cach testai
++ pateiktas Setup.msi/exe failas programos diegimui 
