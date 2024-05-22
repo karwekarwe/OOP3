@@ -1,5 +1,6 @@
+#include "vector.h"
 #include <iostream>
-#include <vector>
+//#include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <limits>
@@ -11,7 +12,7 @@
 using namespace std;
 
 
-  void ranka(vector<Stud>& studentai) {
+  void ranka(Vector<Stud>& studentai) {
 
 
   //  int m = 0; // studentu sk
@@ -105,8 +106,8 @@ using namespace std;
         }
         else if (input == '3'){
 
-            vector<string> vardai = {"Jonas", "Petras", "Antanas", "Juozas", "Ona", "Marija", "Gražina", "Laima"};
-            vector<string> pavardes = {"Jonaitis", "Petraitis", "Antanaitis", "Juozaitis", "Onaitė", "Marijaitė", "Gražinaitė", "Laimaitė"};
+            Vector<string> vardai = {"Jonas", "Petras", "Antanas", "Juozas", "Ona", "Marija", "Gražina", "Laima"};
+            Vector<string> pavardes = {"Jonaitis", "Petraitis", "Antanaitis", "Juozaitis", "Onaitė", "Marijaitė", "Gražinaitė", "Laimaitė"};
 
                 int numBal = rand() % 10 + 1;
                 for (int i = 0; i < numBal; i++) {

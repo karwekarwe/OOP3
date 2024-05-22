@@ -1,6 +1,7 @@
+#include "vector.h"
 #include "funkcijos.h"
 #include <iostream>
-#include <vector>
+//#include <vector>
 #include <algorithm>
 #include <cassert>
 #include <fstream>
@@ -14,7 +15,7 @@ using namespace std;
         double suma = 0;
         double avg = 0;
         double gal;
-     //   vector<int>& namuDarbai = s.getNamuDarbai();
+     //   Vector<int>& namuDarbai = s.getNamuDarbai();
         for (int balas : s.getNamuDarbai()) {
             suma+= balas;
         }
@@ -28,7 +29,7 @@ using namespace std;
         double mediana (Stud& s) {
         double med = 0;
         double gal;
-       // vector<int>& namuDarbai = s.getNamuDarbai();
+       // Vector<int>& namuDarbai = s.getNamuDarbai();
 
         sort(s.getNamuDarbai().begin(), s.getNamuDarbai().end());
 
@@ -53,10 +54,10 @@ using namespace std;
         return a.getGal() > b.getGal();
     }
 
-    void testai(){
+void testai(){
 
         // constructor
-    vector<int> nd = {1, 2, 3};
+    Vector<int> nd = {1, 2, 3};
     std::string vardas = "John";
     std::string pavarde = "Doe";
     Stud s2(nd, vardas, pavarde, 3, 3.3, 3);
@@ -98,7 +99,7 @@ using namespace std;
     cout << "Testai sekmingi" <<endl;
     }
 
-void isvedimas_i_ekrana(const vector<Stud>& luzeriukai, const vector<Stud>& studentai) {
+void isvedimas_i_ekrana(const Vector<Stud>& luzeriukai, const Vector<Stud>& studentai) {
         cout << "Luzeriukai:" << endl;
     for (const auto& studentas : luzeriukai) {
             cout << studentas;
@@ -110,7 +111,7 @@ void isvedimas_i_ekrana(const vector<Stud>& luzeriukai, const vector<Stud>& stud
 }
 
 
-void isvedimas_i_faila(const vector<Stud>& luzeriukai, const vector<Stud>& studentai, const string& failPav) {
+void isvedimas_i_faila(const Vector<Stud>& luzeriukai, const Vector<Stud>& studentai, const string& failPav) {
      ofstream outputFileUnder("luzeriukai " + failPav);
     if (!outputFileUnder.is_open()) {
         cerr << "Nepavyko sukurti naujo failo. outputFileUnder" << endl;

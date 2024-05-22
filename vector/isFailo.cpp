@@ -1,3 +1,4 @@
+#include "vector.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -16,7 +17,7 @@
 using namespace std;
 extern chrono::milliseconds totalTime;
 
-void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
+void isFailo(const string& failPav, Vector<Stud>& studentai, int dyd) {
 
     Stud naujasS;
     string line;
@@ -40,7 +41,7 @@ void isFailo(const string& failPav, vector<Stud>& studentai, int dyd) {
         }
         baluCount -= 3; 
         studentai.reserve(dyd); 
-        vector<string> lines;  
+        Vector<string> lines;  
         lines.reserve(dyd);    
 
         while (getline(failas, line)) {

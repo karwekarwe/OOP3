@@ -1,7 +1,8 @@
+#include "vector.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-#include <vector>
+//#include <vector>
 #include <chrono>
 #include <algorithm>
 #include <iterator>
@@ -14,12 +15,12 @@ using namespace std;
 extern chrono::milliseconds totalTime;
 
 
-void rusiavimasGen(const string& failPav, vector<Stud>& studentai, vector<Stud>& luzeriukai) {
+void rusiavimasGen(const string& failPav, Vector<Stud>& studentai, Vector<Stud>& luzeriukai) {
 
     auto startRus = chrono::steady_clock::now();
     
 
-  //  vector<Stud> luzeriukai;
+  //  Vector<Stud> luzeriukai;
 
 
 

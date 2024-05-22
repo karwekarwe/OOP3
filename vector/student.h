@@ -1,9 +1,9 @@
 #ifndef STUDENT_H
 #define STUDENT_H
-
+#include "vector.h"
 #include <iostream>
 #include <string>
-#include <vector>
+//#include <vector>
 #include <iomanip>
 #include "zmogus.h" 
 
@@ -14,10 +14,10 @@ private:
   //  string vardas_, pavarde_;
     int egzaminas_, ndcount_;
     double gal_;
-    vector<int> namuDarbai_;
+    Vector<int> namuDarbai_;
 public:
     Stud() : egzaminas_(0), gal_(0), ndcount_(0) { }  // default konstruktorius
-    Stud(vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal, int ndcount)
+    Stud(Vector <int>& namuDarbai, string& vardas, string& pavarde, int egzaminas, double gal, int ndcount)
         : namuDarbai_(namuDarbai), Zmogus(vardas, pavarde), egzaminas_(egzaminas), gal_(gal), ndcount_(ndcount) {}
 
     ~Stud() {namuDarbai_.clear(); vardas_.clear(), pavarde_.clear();}
@@ -61,7 +61,7 @@ public:
 
 
     // getteriai
-    vector <int> getNamuDarbai() const {return namuDarbai_;}
+    Vector <int> getNamuDarbai() const {return namuDarbai_;}
     string getVardas() const {return vardas_;}
     string getPavarde() const {return pavarde_;}
     int getEgzaminas() const {return egzaminas_;}
@@ -69,7 +69,7 @@ public:
     int getNdcount() const {return ndcount_;}
 
     //setteriai
-    void setNamuDarbai(const vector <int>& namuDarbai) {namuDarbai_ = namuDarbai;}
+    void setNamuDarbai(const Vector <int>& namuDarbai) {namuDarbai_ = namuDarbai;}
     void setVardas(const string& vardas) {vardas_ = vardas;}
     void setPavarde(const string& pavarde) {pavarde_ = pavarde;}
     void setEgzaminas (int egzaminas) {egzaminas_ = egzaminas;}

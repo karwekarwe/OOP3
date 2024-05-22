@@ -1,6 +1,8 @@
+#include "vector.h"
 #include <iostream>
-#include <vector>
+//#include <vector>
 #include <chrono>
+
 
 
 #include "student.h"
@@ -12,9 +14,9 @@ chrono::milliseconds totalTime(0);
 
 int main() {
 
-    vector<Stud> studentai;
+    Vector<Stud> studentai;
     string failPav;
-    vector<Stud> luzeriukai;
+    Vector<Stud> luzeriukai;
 
 
 
