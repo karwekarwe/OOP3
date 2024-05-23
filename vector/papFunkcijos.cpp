@@ -131,3 +131,119 @@ void isvedimas_i_faila(const Vector<Stud>& luzeriukai, const Vector<Stud>& stude
         outputFileUnder.close();
         outputFileOver.close();
     }
+
+//Vector testai
+
+void VectorTest() {
+
+//pop
+    int suma = 0;
+    Vector<int> v1;
+    v1.push_back(10);
+    v1.push_back(20);
+    v1.push_back(15);
+    v1.push_back(2);
+
+     while (!v1.empty()) {  
+        suma += v1.back();  
+        v1.pop_back();      
+    }
+
+    cout<<"(pop) suma: " << suma <<endl;
+
+//push
+    Vector<int> v2;
+    v2.push_back(10);
+    v2.push_back(20);
+    v2.push_back(15);
+    v2.push_back(2);
+
+    cout <<"(push) v susideda is: "<<endl;
+    for (int i = 0; i < v2.size(); i++) {
+        cout<<  v2[i] <<" ";
+       
+    }
+ cout << '\n';
+
+//shrink
+     Vector<int> v3{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        v3.reserve(20);
+        cout << "(shrink) Talpa prieš shrink_to_fit: " << v3.capacity() << endl;
+        v3.shrink_to_fit();
+        cout << "(shrink) Talpa po shrink_to_fit: " << v3.capacity() << endl;
+
+//begin
+Vector<int> v4;
+        for (int i = 1; i <= 5; i++) v4.push_back(i);
+
+        cout << "(begin) v4 susideda iš:";
+        for (Vector<int>::iterator it = v4.begin(); it != v4.end(); ++it)
+        cout << ' ' << *it;
+        cout << '\n';
+
+//resize
+Vector<int> v5;
+        for (int i = 1; i < 10; i++) v5.push_back(i);
+
+        v5.resize(5);
+        v5.resize(8, 100);
+        v5.resize(12);
+
+        cout << "(resize) v5 susideda iš:";
+        for (Vector<int>::size_type i = 0; i < v5.size(); i++)
+            cout << ' ' << v5[i];
+        cout << '\n';
+
+}
+//insert
+void insertTest() {
+    
+    cout<<"insert:"<<endl;
+
+    // i tuscia
+    Vector<int> v1;
+    v1.insert(v1.begin(), 10);
+    cout << "10 iterpimas i tucia vektoriu: ";
+    for (int i = 0; i < v1.size(); ++i) {
+        cout << v1[i] << " ";
+    }
+    cout << endl; // 100
+
+    // pradzioj
+    Vector<int> v2 = {1, 2, 3, 4, 5};
+    v2.insert(v2.begin(), 0);
+    cout << "0 iterpimas i pradzia: ";
+    for (int i = 0; i < v2.size(); ++i) {
+        cout << v2[i] << " ";
+    }
+    cout << endl; // 0 1 2 3 4 5
+
+    // vidury
+    Vector<int> v3 = {1, 2, 4, 5};
+    v3.insert(v3.begin() + 2, 3);
+    cout << "3 iterpimas vidury: ";
+    for (int i = 0; i < v3.size(); ++i) {
+        cout << v3[i] << " ";
+    }
+    cout << endl; //  1 2 3 4 5
+
+    // pabaigoj
+    Vector<int> v4 = {1, 2, 3, 4};
+    v4.insert(v4.end(), 5);
+    cout << "5 iterpimas pabaigoj: ";
+    for (int i = 0; i < v4.size(); ++i) {
+        cout << v4[i] << " ";
+    }
+    cout << endl; // 1 2 3 4 5
+
+    // kelis
+    Vector<int> v5 = {1, 3, 4};
+    v5.insert(v5.begin() + 1, 2);
+    v5.insert(v5.begin() + 4, 5);
+    cout << "keli iterpimai: ";
+    for (int i = 0; i < v5.size(); ++i) {
+        cout << v5[i] << " ";
+    }
+    cout << endl; // 1 2 3 4 5
+}
+

@@ -18,8 +18,9 @@ int main() {
 
 
         try {
-                 char rf;
-                cout << "Ivestis ranka - 1, Is failo - 2" <<endl;
+
+                char rf;
+                cout << "Ivestis ranka - 1, Is failo - 2, Vector klasės testavimas - 3" <<endl;
                 cin >> rf;
 
                 if (rf == '1') {
@@ -121,7 +122,12 @@ int main() {
 
             
                 }
+
+                else if (rf == '3'){
                 testai();
+                VectorTest();
+                insertTest();
+                }
 
 
         } catch (const invalid_argument& e) {
@@ -130,8 +136,6 @@ int main() {
             cout << "Neatpažinta klaida: " << e.what() << " Programa baigia darba.\n";
             return 1;
         }
-
-
 
     cout << "Visos programos veikimo laikas: " << totalTime.count() << " milisekundes" << endl;
 

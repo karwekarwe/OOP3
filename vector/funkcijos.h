@@ -16,5 +16,8 @@ bool rusiavimasG(const Stud& a, const Stud& b);
 void testai();
 void isvedimas_i_ekrana(const Vector<Stud>& luzeriukai, const Vector<Stud>& studentai);
 void isvedimas_i_faila(const Vector<Stud>& luzeriukai, const Vector<Stud>& studentai, const string& failPav);
+void VectorTest();
+void insertTest();
+
 
 #endif 
