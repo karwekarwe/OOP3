@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
-//#include <vector>
 #include <chrono>
 #include <algorithm>
 #include <iterator>
@@ -18,25 +17,20 @@ extern chrono::milliseconds totalTime;
 void rusiavimasGen(const string& failPav, Vector<Stud>& studentai, Vector<Stud>& luzeriukai) {
 
     auto startRus = chrono::steady_clock::now();
-    
-
-  //  Vector<Stud> luzeriukai;
 
 
-
- /*   ofstream outputFileUnder("luzeriukai " + failPav);
-    if (!outputFileUnder.is_open()) {
-        cerr << "Nepavyko sukurti naujo failo. outputFileUnder" << endl;
-        return;
+    // Manually copying elements that match the condition
+    for (auto it = studentai.begin(); it != studentai.end(); ++it) {
+        if (it->getGal() < 5.0) {
+            luzeriukai.push_back(*it);
+        }
     }
-    ofstream outputFileOver("intelektualai " + failPav);
-    if (!outputFileOver.is_open()) {
-        cerr << "Nepavyko sukurti naujo failo. outputFileOver" << endl;
-        return;
-    }*/
 
-copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const Stud& student){return student.getGal() < 5.0; });
-    studentai.erase(remove_if(studentai.begin(), studentai.end(), [](const Stud& student) {return student.getGal() < 5.0; }), studentai.end());
+    // Erasing elements that match the condition
+    auto new_end = std::remove_if(studentai.begin(), studentai.end(), [](const Stud& student) {
+        return student.getGal() < 5.0;
+    });
+    studentai.erase(new_end, studentai.end());
 
 
             auto endRus = chrono::steady_clock::now(); 
@@ -72,17 +66,5 @@ copy_if(studentai.begin(), studentai.end(), back_inserter(luzeriukai), [](const 
     
                totalTime += elapsedIsved;
 
-
-
-
- /*      for (const auto& studentas : luzeriukai){
-            outputFileUnder<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
-        }
-        for (const auto& studentas : studentai){
-            outputFileOver<< studentas.getVardas() << setw(20) << studentas.getPavarde() << setw(20) << studentas.getGal() << endl;
-        }        
-
-outputFileUnder.close();
-outputFileOver.close();*/ 
 
 }

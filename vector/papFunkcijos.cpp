@@ -1,7 +1,6 @@
 #include "vector.h"
 #include "funkcijos.h"
 #include <iostream>
-//#include <vector>
 #include <algorithm>
 #include <cassert>
 #include <fstream>
@@ -64,19 +63,19 @@ void testai(){
     //Stud s2(vardas, pavarde);
     assert(s2.getVardas() == "John");
     assert(s2.getPavarde() == "Doe");
-    assert(s2.getNamuDarbai().empty());
-    assert(s2.getEgzaminas() == 0);
-    assert(s2.getGal() == 0);
-    assert(s2.getNdcount() == 0);
+    assert(s2.getNamuDarbai() == nd);
+    assert(s2.getEgzaminas() == 3);
+    assert(s2.getGal() == 3.3);
+    assert(s2.getNdcount() == 3);
 
         // copy contruct
     Stud s3 = s2;
     assert(s3.getVardas() == "John");
     assert(s3.getPavarde() == "Doe");
-    assert(s3.getNamuDarbai().empty());
-    assert(s3.getEgzaminas() == 0);
-    assert(s3.getGal() == 0);
-    assert(s3.getNdcount() == 0);
+    assert(s3.getNamuDarbai() == nd);
+    assert(s3.getEgzaminas() == 3);
+    assert(s3.getGal() == 3.3);
+    assert(s3.getNdcount() == 3);
 
 
         // move constr
@@ -84,13 +83,13 @@ void testai(){
     Stud s4 = std::move(s3);
     assert(s4.getVardas() == "John");
     assert(s4.getPavarde() == "Doe");
-    assert(s4.getNamuDarbai().empty());
-    assert(s4.getEgzaminas() == 0);
-    assert(s4.getGal() == 0);
-    assert(s4.getNdcount() == 0);
+    assert(s4.getNamuDarbai() == nd);
+    assert(s4.getEgzaminas() == 3);
+    assert(s4.getGal() == 3.3);
+    assert(s4.getNdcount() == 3);
 
-//assert(s3.getVardas().empty());
-   // assert(s3.getPavarde().empty());
+    assert(s3.getVardas().empty());
+    assert(s3.getPavarde().empty());
     assert(s3.getNamuDarbai().empty());
     assert(s3.getEgzaminas() == 0);
     assert(s3.getGal() == 0.0);

@@ -1,6 +1,5 @@
 #include "vector.h"
 #include <iostream>
-//#include <vector>
 #include <cstdlib>
 #include <ctime>
 #include <limits>
@@ -14,8 +13,6 @@ using namespace std;
 
   void ranka(Vector<Stud>& studentai) {
 
-
-  //  int m = 0; // studentu sk
     string vardas, pavarde;
     int balas, egzBalas;
     char pabaiga;

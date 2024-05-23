@@ -1,9 +1,6 @@
 #include "vector.h"
 #include <iostream>
-//#include <vector>
 #include <chrono>
-
-
 
 #include "student.h"
 #include "funkcijos.h"

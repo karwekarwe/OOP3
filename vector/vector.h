@@ -1,8 +1,13 @@
+#pragma once
+
+
 #include <iostream>
 #include <stdexcept>
 #include <algorithm>
 #include <iterator>
 #include <limits>
+#include <initializer_list>
+
 
 template <typename T>
 class Vector {
@@ -19,7 +24,7 @@ class Vector {
     using const_reverse_iterator = std::reverse_iterator<const_iterator>; 
 
 
-    
+     //member functions:
 
     //default konstruktorius
     Vector() : _size(0), _capacity(0), _data(nullptr) {}
@@ -70,10 +75,18 @@ class Vector {
         }
         return *this;
     }
-    //member functions:
+   
 
     //destruktorius
         ~Vector() { delete[] _data;}
+
+
+    // Initializer list constructor
+    Vector(std::initializer_list<T> init) 
+    : _size(init.size()), _capacity(init.size()), _data(new T[init.size()]) {
+        std::copy(init.begin(), init.end(), _data);
+    }
+
 
     // Element access - grazina elemento reference nurodytoj lokacijoj
     reference operator[](size_type pos) {
@@ -223,6 +236,20 @@ class Vector {
         std::copy(begin() + index + 1, end(), begin() + index);
         --_size;
         return begin() + index;
+    }
+
+     iterator erase(iterator pos) {
+        if (pos < _data || pos >= _data + size()) return end();
+        std::move(pos + 1, _data + size(), pos);
+        --_size;
+        return pos;
+    }
+
+    iterator erase(iterator first, iterator last) {
+        if (first < _data || last > _data + size() || first > last) return end();
+        auto new_end = std::move(last, _data + size(), first);
+        _size -= std::distance(first, last);
+        return first;
     }
 
     //swapina su kitu vectorium
