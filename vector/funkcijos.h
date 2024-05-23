@@ -18,6 +18,8 @@ void isvedimas_i_ekrana(const Vector<Stud>& luzeriukai, const Vector<Stud>& stud
 void isvedimas_i_faila(const Vector<Stud>& luzeriukai, const Vector<Stud>& studentai, const string& failPav);
 void VectorTest();
 void insertTest();
+void vectorVsVector();
+
 
 
 #endif 

@@ -127,6 +127,7 @@ int main() {
                 testai();
                 VectorTest();
                 insertTest();
+                vectorVsVector();
                 }
 
 

@@ -5,6 +5,8 @@
 #include <cassert>
 #include <fstream>
 #include <iomanip>
+#include <chrono>
+#include <vector>
 
 
 using namespace std;
@@ -247,3 +249,35 @@ void insertTest() {
     cout << endl; // 1 2 3 4 5
 }
 
+void vectorVsVector() {
+    auto start = chrono::steady_clock::now();
+    unsigned int sz = 100000000;  // 10000, 100000, 1000000, 10000000, 100000000
+    std::vector<int> v1;
+    int stdVector = 0;
+    for (unsigned int i = 1; i <= sz; ++i) {
+        v1.push_back(i);
+        if (v1.capacity() == v1.size()) {
+            ++stdVector;
+        }
+    }
+
+    auto end = chrono::steady_clock::now();
+    auto skirtumas = chrono::duration<double> (end - start).count();   
+    cout << "std::vector užpildymas " << sz << " dydzio užėme: " << setprecision(8) << skirtumas << " sekundes" << endl; 
+    cout << "std::vector atmintis buvo perskirstyta " << stdVector << " kartų" << endl;
+
+    auto start1 = chrono::steady_clock::now();
+    Vector<int> v2;
+    int vectorx = 0;
+    for (unsigned int i = 1; i <= sz; ++i) {
+        v2.push_back(i);
+        if (v2.capacity() == v2.size()) {
+            ++vectorx;
+        }
+    }
+                
+    auto end1 = chrono::steady_clock::now();
+    auto skirtumas1 = chrono::duration<double> (end1 - start1).count(); 
+    cout << "Vector užpildymas " << sz << " dydzio užėme: " << setprecision(8) << skirtumas1 << " sekundes" << endl;   
+    cout << "Vector atmintis buvo perskirstyta " << stdVector << " kartų" << endl;
+}
