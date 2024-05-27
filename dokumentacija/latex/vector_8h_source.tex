@@ -1,0 +1,362 @@
+\doxysection{vector.\+h}
+\hypertarget{vector_8h_source}{}\label{vector_8h_source}\index{vector/vector.h@{vector/vector.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <iterator>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <initializer\_list>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_vector}{Vector}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{using\ }size\_type\ =\ size\_t;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{using\ }value\_type\ =\ T;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{using\ }reference\ \ =\ T\&;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{using\ }const\_reference\ =\ \textcolor{keyword}{const}\ T\&;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{using\ }iterator\ =\ T*;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{using\ }const\_iterator\ =\ \textcolor{keyword}{const}\ T*;\ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{using\ }pointer\ =\ T*;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{using\ }const\_pointer\ =\ \textcolor{keyword}{const}\ T*;\ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{using\ }reverse\_iterator\ =\ std::reverse\_iterator<iterator>;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{using\ }const\_reverse\_iterator\ =\ std::reverse\_iterator<const\_iterator>;\ }
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \textcolor{comment}{//member\ functions:}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//default\ konstruktorius}}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}()\ :\ \_size(0),\ \_capacity(0),\ \_data(\textcolor{keyword}{nullptr})\ \{\}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//fill\ konstruktorius}}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}(size\_type\ count,\ \textcolor{keyword}{const}\ value\_type\&\ value\ =\ value\_type())\ }
+\DoxyCodeLine{00034\ \ \ \ \ :\ \_size(count),\ \_capacity(count),\ \_data(\textcolor{keyword}{new}\ value\_type[count])\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ std::fill(\_data,\ \_data\ +\ \_size,\ value);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//copy\ konstruktorius}}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector}}\&\ other)\ }
+\DoxyCodeLine{00040\ \ \ \ \ :\ \_size(other.\_size),\ \_capacity(other.\_capacity),\ \_data(\textcolor{keyword}{new}\ value\_type[other.\_capacity])\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ std::copy(other.\_data,\ other.\_data\ +\ \_size,\ \_data);}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//move\ konstruktorius}}
+\DoxyCodeLine{00045\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}(\mbox{\hyperlink{class_vector}{Vector}}\&\&\ other)\ noexcept\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ :\ \_size(other.\_size),\ \_capacity(other.\_capacity),\ \_data(other.\_data)\ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ other.\_size\ =\ 0;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ other.\_capacity\ =\ 0;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ other.\_data\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//copy\ assignment\ operatorius}}
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector}}\&\ other)\ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ value\_type*\ new\_data\ =\ \textcolor{keyword}{new}\ value\_type[other.\_capacity];}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ std::copy(other.\_data,\ other.\_data\ +\ other.\_size,\ new\_data);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ \_data;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \_data\ =\ new\_data;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \_size\ =\ other.\_size;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \_capacity\ =\ other.\_capacity;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//move\ assignment\ operatorius}}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}\&\ operator=(\mbox{\hyperlink{class_vector}{Vector}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ \_data;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \_data\ =\ other.\_data;}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \_size\ =\ other.\_size;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \_capacity\ =\ other.\_capacity;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ other.\_data\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ other.\_size\ =\ 0;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ other.\_capacity\ =\ 0;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ }
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//destruktorius}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector}{\string~Vector}}()\ \{\ \textcolor{keyword}{delete}[]\ \_data;\}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Initializer\ list\ constructor}}
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector}}(std::initializer\_list<T>\ init)\ }
+\DoxyCodeLine{00086\ \ \ \ \ :\ \_size(init.size()),\ \_capacity(init.size()),\ \_data(\textcolor{keyword}{new}\ T[init.size()])\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ std::copy(init.begin(),\ init.end(),\ \_data);}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ Element\ access\ -\/\ grazina\ elemento\ reference\ nurodytoj\ lokacijoj}}
+\DoxyCodeLine{00092\ \ \ \ \ reference\ operator[](size\_type\ pos)\ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[pos];}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//const\ element\ access}}
+\DoxyCodeLine{00097\ \ \ \ \ const\_reference\ operator[](size\_type\ pos)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[pos];}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//su\ bounds\ check}}
+\DoxyCodeLine{00101\ \ \ \ \ reference\ at(size\_type\ pos)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ >=\ \_size)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Vector::at:\ index\ out\ of\ range"{}});}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[pos];}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ const\_reference\ at(size\_type\ pos)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ >=\ \_size)\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Vector::at:\ index\ out\ of\ range"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[pos];}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \textcolor{comment}{//\ pirmo\ elemento\ reference}}
+\DoxyCodeLine{00116\ \ \ \ \ reference\ front()\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[0];}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \textcolor{comment}{//\ const\ pirmo\ elemento\ reference}}
+\DoxyCodeLine{00121\ \ \ \ \ const\_reference\ front()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[0];}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{comment}{//\ paskutinio\ elemento\ reference}}
+\DoxyCodeLine{00126\ \ \ \ \ reference\ back()\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[\_size\ -\/\ 1];}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{comment}{//\ const\ paskutinio\ elemento\ reference}}
+\DoxyCodeLine{00131\ \ \ \ \ const\_reference\ back()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[\_size\ -\/\ 1];}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ pointeris\ i\ pirma\ vektoriaus\ internal\ array\ elementa}}
+\DoxyCodeLine{00136\ \ \ \ \ pointer\ data()\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data;}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ const\ pointeris\ i\ pirma\ vektoriaus\ internal\ array\ elementa}}
+\DoxyCodeLine{00141\ \ \ \ \ const\_pointer\ data()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data;}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//capacity}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{comment}{//\ dydis\ -\/\ grazina\ elementu\ sk}}
+\DoxyCodeLine{00147\ \ \ \ \ size\_type\ size()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_size;}
+\DoxyCodeLine{00149\ \ \ \ \ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//talpa\ -\/\ grazina\ kiek\ elementu\ telpa\ dabar}}
+\DoxyCodeLine{00152\ \ \ \ \ size\_type\ capacity()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_capacity;}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//ar\ empty}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{bool}\ empty()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_size\ ==\ 0;}
+\DoxyCodeLine{00159\ \ \ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//max\ sk\ elementu}}
+\DoxyCodeLine{00162\ \ \ \ \ size\_type\ max\_size()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordflow}{return}\ std::numeric\_limits<size\_type>::max();}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{comment}{//rezervuoja\ didesne\ talpa}}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ reserve(size\_type\ new\_cap)\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_cap\ >\ \_capacity)\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ value\_type*\ new\_data\ =\ \textcolor{keyword}{new}\ value\_type[new\_cap];}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ std::copy(\_data,\ \_data\ +\ \_size,\ new\_data);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ \_data;}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \_data\ =\ new\_data;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \_capacity\ =\ new\_cap;}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00175\ \ \ \ \ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//freeina\ nenaudojama\ atminti}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \textcolor{keywordtype}{void}\ shrink\_to\_fit()\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_capacity\ >\ \_size)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ value\_type*\ new\_data\ =\ \textcolor{keyword}{new}\ value\_type[\_size];}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ std::copy(\_data,\ \_data\ +\ \_size,\ new\_data);}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ \_data;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \_data\ =\ new\_data;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \_capacity\ =\ \_size;}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00186\ \ \ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{comment}{//padidina\ talpa}}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{void}\ resize(size\_type\ count,\ value\_type\ value\ =\ value\_type())\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ \_capacity)\ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ reserve(count);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ \_size)\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ std::fill(\_data\ +\ \_size,\ \_data\ +\ count,\ value);}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \_size\ =\ count;}
+\DoxyCodeLine{00197\ \ \ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{comment}{//modifiers:}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//push}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{void}\ push\_back(\textcolor{keyword}{const}\ value\_type\&\ value)\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_size\ ==\ \_capacity)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ reserve(\_capacity\ ==\ 0\ ?\ 1\ :\ 2\ *\ \_capacity);}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \_data[\_size++]\ =\ value;}
+\DoxyCodeLine{00207\ \ \ \ \ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{comment}{//pop}}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{void}\ pop\_back()\ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_size\ >\ 0)\ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ -\/-\/\_size;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00214\ \ \ \ \ \}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{comment}{//clear}}
+\DoxyCodeLine{00217\ \ \ \ \ \ \textcolor{keywordtype}{void}\ clear()\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \_size\ =\ 0;}
+\DoxyCodeLine{00219\ \ \ \ \ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//insertina\ i\ norima\ vieta}}
+\DoxyCodeLine{00222\ \ \ \ \ \ iterator\ insert(const\_iterator\ pos,\ \textcolor{keyword}{const}\ value\_type\&\ value)\ \{}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ size\_type\ index\ =\ pos\ -\/\ begin();}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\_size\ ==\ \_capacity)\ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ reserve(\_capacity\ ==\ 0\ ?\ 1\ :\ 2\ *\ \_capacity);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ std::copy\_backward(begin()\ +\ index,\ end(),\ end()\ +\ 1);}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \_data[index]\ =\ value;}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ ++\_size;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ begin()\ +\ index;}
+\DoxyCodeLine{00231\ \ \ \ \ \}}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{//erasina\ specifinej\ vietoj}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ iterator\ erase(const\_iterator\ pos)\ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ size\_type\ index\ =\ pos\ -\/\ begin();}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ std::copy(begin()\ +\ index\ +\ 1,\ end(),\ begin()\ +\ index);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ -\/-\/\_size;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ begin()\ +\ index;}
+\DoxyCodeLine{00239\ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ iterator\ erase(iterator\ pos)\ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pos\ <\ \_data\ ||\ pos\ >=\ \_data\ +\ size())\ \textcolor{keywordflow}{return}\ end();}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ std::move(pos\ +\ 1,\ \_data\ +\ size(),\ pos);}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ -\/-\/\_size;}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pos;}
+\DoxyCodeLine{00246\ \ \ \ \ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ iterator\ erase(iterator\ first,\ iterator\ last)\ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first\ <\ \_data\ ||\ last\ >\ \_data\ +\ size()\ ||\ first\ >\ last)\ \textcolor{keywordflow}{return}\ end();}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ new\_end\ =\ std::move(last,\ \_data\ +\ size(),\ first);}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \_size\ -\/=\ std::distance(first,\ last);}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ first;}
+\DoxyCodeLine{00253\ \ \ \ \ \}}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{comment}{//swapina\ su\ kitu\ vectorium}}
+\DoxyCodeLine{00256\ \ \ \ \ \ \textcolor{keywordtype}{void}\ swap(\mbox{\hyperlink{class_vector}{Vector}}\&\ other)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ std::swap(\_data,\ other.\_data);}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ std::swap(\_size,\ other.\_size);}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ std::swap(\_capacity,\ other.\_capacity);}
+\DoxyCodeLine{00260\ \ \ \ \ \}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \textcolor{comment}{//\ Iteratoriai:}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \textcolor{comment}{//grazina\ pradzios\ it}}
+\DoxyCodeLine{00265\ \ \ \ \ iterator\ begin()\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data;}
+\DoxyCodeLine{00267\ \ \ \ \ \}}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{comment}{//grazina\ const\ pradzios\ it}}
+\DoxyCodeLine{00270\ \ \ \ \ const\_iterator\ begin()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data;}
+\DoxyCodeLine{00272\ \ \ \ \ \}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{comment}{//grazina\ pabaigos\ it}}
+\DoxyCodeLine{00275\ \ \ \ \ iterator\ end()\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data\ +\ \_size;}
+\DoxyCodeLine{00277\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{comment}{//grazina\ pabaigos\ const\ it}}
+\DoxyCodeLine{00280\ \ \ \ \ const\_iterator\ end()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \_data\ +\ \_size;}
+\DoxyCodeLine{00282\ \ \ \ \ \}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{comment}{//\ reverse\ iteratorius\ pradzios}}
+\DoxyCodeLine{00285\ \ \ \ \ reverse\_iterator\ rbegin()\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reverse\_iterator(end());}
+\DoxyCodeLine{00287\ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{comment}{//\ const\ reverse\ iteratorius\ pradzios}}
+\DoxyCodeLine{00289\ \ \ \ \ \ const\_reverse\_iterator\ rbegin()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ const\_reverse\_iterator(end());}
+\DoxyCodeLine{00291\ \ \ \ \ \}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{comment}{//\ reverse\ iteratorius\ pabaigos}}
+\DoxyCodeLine{00294\ \ \ \ \ \ reverse\_iterator\ rend()\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reverse\_iterator(begin());}
+\DoxyCodeLine{00296\ \ \ \ \ \}}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{comment}{//\ const\ reverse\ iteratorius\ pabaigos}}
+\DoxyCodeLine{00299\ \ \ \ \ const\_reverse\_iterator\ rend()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ const\_reverse\_iterator(begin());}
+\DoxyCodeLine{00301\ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00307\ \ \ \ \ size\_type\ \_size;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00308\ \ \ \ \ size\_type\ \_capacity;\ \ \ }
+\DoxyCodeLine{00309\ \ \ \ \ value\_type*\ \_data;\ \ \ \ \ }
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \};}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{comment}{//\ Non-\/member\ }}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \textcolor{comment}{//\ tikrina\ ar\ lygus}}
+\DoxyCodeLine{00316\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00317\ \textcolor{keywordtype}{bool}\ operator==(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector<T>}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector<T>}}\&\ rhs)\ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keywordflow}{return}\ lhs.size()\ ==\ rhs.size()\ \&\&\ std::equal(lhs.begin(),\ lhs.end(),\ rhs.begin());}
+\DoxyCodeLine{00319\ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{comment}{//tikrina\ ar\ nelygus}}
+\DoxyCodeLine{00322\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00323\ \textcolor{keywordtype}{bool}\ operator!=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector<T>}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector<T>}}\&\ rhs)\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keywordflow}{return}\ !(lhs\ ==\ rhs);}
+\DoxyCodeLine{00325\ \}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \textcolor{comment}{//\ std::swap\ sitam\ vektorius}}
+\DoxyCodeLine{00328\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00329\ \textcolor{keywordtype}{void}\ swap(\mbox{\hyperlink{class_vector}{Vector<T>}}\&\ lhs,\ \mbox{\hyperlink{class_vector}{Vector<T>}}\&\ rhs)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00330\ \ \ \ \ lhs.swap(rhs);}
+\DoxyCodeLine{00331\ \}}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \textcolor{comment}{//\ erase}}
+\DoxyCodeLine{00334\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ UnaryPredicate>}
+\DoxyCodeLine{00335\ \textcolor{keyword}{typename}\ Vector<T>::iterator\ erase\_if(\mbox{\hyperlink{class_vector}{Vector<T>}}\&\ vec,\ UnaryPredicate\ p)\ \{}
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ std::remove\_if(vec.begin(),\ vec.end(),\ p);}
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{keyword}{auto}\ res\ =\ vec.end();}
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ vec.end())\ \{}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ res\ =\ vec.erase(it,\ vec.end());}
+\DoxyCodeLine{00340\ \ \ \ \ \}}
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordflow}{return}\ res;}
+\DoxyCodeLine{00342\ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \textcolor{comment}{//\ output}}
+\DoxyCodeLine{00345\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00346\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector}{Vector<T>}}\&\ vec)\ \{}
+\DoxyCodeLine{00347\ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}["{}};}
+\DoxyCodeLine{00348\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ vec.size();\ ++i)\ \{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ os\ <<\ vec[i];}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ !=\ vec.size()\ -\/\ 1)\ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ \ \ \ \ \}}
+\DoxyCodeLine{00354\ \ \ \ \ os\ <<\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00355\ \ \ \ \ \textcolor{keywordflow}{return}\ os;}
+\DoxyCodeLine{00356\ \}}
+
+\end{DoxyCode}

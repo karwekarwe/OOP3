@@ -1,0 +1,113 @@
+\doxysection{student.\+h}
+\hypertarget{student_8h_source}{}\label{student_8h_source}\index{vector/student.h@{vector/student.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ STUDENT\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ STUDENT\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}vector.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}zmogus.h"{}}\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_stud}{Stud}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_zmogus}{Zmogus}}\{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00013\ \ \ \textcolor{comment}{//\ \ string\ vardas\_,\ pavarde\_;}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ egzaminas\_,\ ndcount\_;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ gal\_;}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_vector}{Vector<int>}}\ namuDarbai\_;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_stud}{Stud}}()\ :\ egzaminas\_(0),\ gal\_(0),\ ndcount\_(0)\ \{\ \}\ \ \textcolor{comment}{//\ default\ konstruktorius}}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_stud}{Stud}}(Vector\ <int>\&\ namuDarbai,\ \textcolor{keywordtype}{string}\&\ vardas,\ \textcolor{keywordtype}{string}\&\ pavarde,\ \textcolor{keywordtype}{int}\ egzaminas,\ \textcolor{keywordtype}{double}\ gal,\ \textcolor{keywordtype}{int}\ ndcount)}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ :\ namuDarbai\_(namuDarbai),\ \mbox{\hyperlink{class_zmogus}{Zmogus}}(vardas,\ pavarde),\ egzaminas\_(egzaminas),\ gal\_(gal),\ ndcount\_(ndcount)\ \{\}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{class_stud}{\string~Stud}}()\ \{namuDarbai\_.clear();\ vardas\_.clear(),\ pavarde\_.clear();\}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Copy\ constructor}}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{class_stud}{Stud}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_stud}{Stud}}\&\ other)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_zmogus}{Zmogus}}(other.vardas\_,\ other.pavarde\_),\ \ egzaminas\_(other.egzaminas\_),\ \ gal\_(other.gal\_),\ \ namuDarbai\_(other.namuDarbai\_),\ ndcount\_(other.ndcount\_)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Copy\ assignment\ operator}}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{class_stud}{Stud}}\&\ operator=(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_stud}{Stud}}\&\ other)\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ vardas\_\ =\ other.vardas\_;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ pavarde\_\ =\ other.pavarde\_;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ egzaminas\_\ =\ other.egzaminas\_;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ gal\_\ =\ other.gal\_;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ namuDarbai\_\ =\ other.namuDarbai\_;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ ndcount\_\ =\ other.ndcount\_;\ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{comment}{//\ Move\ constructor}}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{class_stud}{Stud}}(\mbox{\hyperlink{class_stud}{Stud}}\&\&\ other)\ noexcept\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_zmogus}{Zmogus}}(move(other.vardas\_),\ move(other.pavarde\_)),\ egzaminas\_(other.egzaminas\_),\ gal\_(other.gal\_),\ namuDarbai\_(move(other.namuDarbai\_)),\ ndcount\_(move(other.ndcount\_))\{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ other.vardas\_.clear();\ other.pavarde\_.clear();\ other.ndcount\_\ =\ 0;\ \ other.egzaminas\_\ =\ 0;\ other.gal\_\ =\ 0;\ other.namuDarbai\_.clear();\}\textcolor{comment}{//\ clearint}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ Move\ assignment\ operator}}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{class_stud}{Stud}}\&\ operator=(\mbox{\hyperlink{class_stud}{Stud}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ vardas\_\ =\ move(other.vardas\_);}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ pavarde\_\ =\ move(other.pavarde\_);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ egzaminas\_\ =\ move(other.egzaminas\_);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ gal\_\ =\ move(other.gal\_);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ namuDarbai\_\ =\ move(other.namuDarbai\_);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ ndcount\_\ =\ move(other.ndcount\_);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ getteriai}}
+\DoxyCodeLine{00063\ \ \ \ \ Vector\ <int>\ getNamuDarbai()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ namuDarbai\_;\}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{string}\ getVardas()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ vardas\_;\}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{string}\ getPavarde()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ pavarde\_;\}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{int}\ getEgzaminas()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ egzaminas\_;\}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{double}\ getGal()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ gal\_;\}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{int}\ getNdcount()\textcolor{keyword}{\ const\ }\{\textcolor{keywordflow}{return}\ ndcount\_;\}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//setteriai}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ setNamuDarbai(\textcolor{keyword}{const}\ Vector\ <int>\&\ namuDarbai)\ \{namuDarbai\_\ =\ namuDarbai;\}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ setVardas(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ vardas)\ \{vardas\_\ =\ vardas;\}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ setPavarde(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ pavarde)\ \{pavarde\_\ =\ pavarde;\}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ setEgzaminas\ (\textcolor{keywordtype}{int}\ egzaminas)\ \{egzaminas\_\ =\ egzaminas;\}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ setGal\ (\textcolor{keywordtype}{double}\ gal)\ \{gal\_\ =\ gal;\}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ setNdcount\ (\textcolor{keywordtype}{int}\ ndcount)\ \{ndcount\_\ =\ ndcount;\}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//kiti}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ addND(\textcolor{keywordtype}{int}\ namuDarbai)\ \{\ namuDarbai\_.push\_back(namuDarbai);\ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ clearND()\ \{\ namuDarbai\_.clear();\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \textcolor{comment}{//\ Input\ Operator}}
+\DoxyCodeLine{00083\ \textcolor{keyword}{friend}\ std::istream\&\ operator>>(std::istream\&\ is,\ \mbox{\hyperlink{class_stud}{Stud}}\&\ stud)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ is\ >>\ stud.vardas\_\ >>\ stud.pavarde\_;}
+\DoxyCodeLine{00085\ \ \ \ \ stud.namuDarbai\_.clear();\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{int}\ balas;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ stud.getNdcount();\ ++i)\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ is\ >>\ balas;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ stud.namuDarbai\_.push\_back(balas);}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ }
+\DoxyCodeLine{00092\ \ \ \ \ is\ >>\ stud.egzaminas\_;}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordflow}{return}\ is;}
+\DoxyCodeLine{00094\ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ Output\ Operator}}
+\DoxyCodeLine{00097\ \textcolor{keyword}{friend}\ std::ostream\&\ operator<<(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_stud}{Stud}}\&\ stud)\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ os\ <<\ stud.vardas\_\ <<\ setw(20)\ <<\ stud.pavarde\_\ <<\ setw(20)\ <<\ stud.gal\_\ <<\ setw(20)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordflow}{return}\ os;}
+\DoxyCodeLine{00100\ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
