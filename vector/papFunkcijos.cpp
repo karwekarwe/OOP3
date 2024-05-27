@@ -251,7 +251,7 @@ void insertTest() {
 
 void vectorVsVector() {
     auto start = chrono::steady_clock::now();
-    unsigned int sz = 10000000;  // 10000, 100000, 1000000, 10000000, 100000000
+    unsigned int sz = 10000;  // 10000, 100000, 1000000, 10000000, 100000000
     std::vector<int> v1;
     int stdVector = 0;
     for (unsigned int i = 1; i <= sz; ++i) {
@@ -262,8 +262,8 @@ void vectorVsVector() {
     }
 
     auto end = chrono::steady_clock::now();
-    auto skirtumas = chrono::duration_cast<chrono::milliseconds> (end - start);   
-    cout << "std::vector užpildymas " << sz << " dydzio užėme: " << setprecision(8) << skirtumas.count() << " sekundes" << endl; 
+    auto skirtumas = chrono::duration_cast<chrono::nanoseconds> (end - start);   
+    cout << "std::vector užpildymas " << sz << " dydzio užėme: " << skirtumas.count() << " milisekundes" << endl; 
     cout << "std::vector atmintis buvo perskirstyta " << stdVector << " kartų" << endl;
 
     auto start1 = chrono::steady_clock::now();
@@ -277,7 +277,7 @@ void vectorVsVector() {
     }
                 
     auto end1 = chrono::steady_clock::now();
-    auto skirtumas1 = chrono::duration_cast<chrono::milliseconds> (end1 - start1); 
-    cout << "Vector užpildymas " << sz << " dydzio užėme: " << setprecision(8) << skirtumas1.count() << " sekundes" << endl;   
-    cout << "Vector atmintis buvo perskirstyta " << stdVector << " kartų" << endl;
+    auto skirtumas1 = chrono::duration_cast<chrono::nanoseconds> (end1 - start1); 
+    cout << "Vector užpildymas " << sz << " dydzio užėme: " << setprecision(8) << skirtumas1.count() << " milisekundes" << endl;   
+    cout << "Vector atmintis buvo perskirstyta " << vectorx << " kartų" << endl;
 }
