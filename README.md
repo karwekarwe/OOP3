@@ -57,7 +57,7 @@
 
 # v3.0
 
-##std::vector vs Vector
+## std::vector vs Vector
 
 Tuščių vektorių pildymas (milisekundėmis):
 
