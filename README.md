@@ -1,7 +1,5 @@
 # README
 
-# v3.0
-
 ## Paleisties proceso instrukcija:
 
 1. Visų pirma, iš https://github.com/karwekarwe/OOP2 reikia klonuoti repozitoriją savo darbo aplinkoje naudojant 'git clone'.
@@ -51,6 +49,50 @@
 + Realizuoti ir demonstruojami unit test testai (Catch - [https://github.com/catchorg/Catch2/releases/tag/v3.6.0?fbclid=IwZXh0bgNhZW0CMTEAAR22tR50_uOfmSpIaDAg-vh1J6x_Vx8HP37CkzBrw8thoaoX5rqA3GqSxuI_aem_AQ2dqup3Bzkw-VMJZk7ygzB1di_IcHDSQ3fv-AiWsivb2Z2UqpWUYVYC1sEDRIGEkJk_zpuSw3frjTqTHAp6pkB1](https://github.com/catchorg/Catch2/releases/tag/v3.6.0))
 + Klasę aprašanti dokumentacija HTML/TEX formatais - https://www.doxygen.nl/manual/index.html
 ## v3.0
-+ sukurtas Vector konteineris
-+ Vector cach testai
-+ pateiktas Setup.msi/exe failas programos diegimui 
++ sukurta ir pritaikyta (atskira nuo std::vector) Vector klasė
++ Paruošti Vector cach testai
++ Sugeneruota dokumentacija
++ pateiktas Setup.exe failas programos diegimui
+
+
+# v3.0
+
+##std::vector vs Vector
+
+Tuščių vektorių pildymas (milisekundėmis):
+
+
+|             | 1000 | 10000 | 100000 | 1000000 | 10000000 |
+|-------------|------|-------|--------|---------|----------|
+| std::vector | 0.27 | 3     | 28     | 289     | 2848     |
+| Vector      | 0.08 | 1     | 9      | 118     | 1106     |
+
+Atminties perskirstymai užpildant 100 000 000 elementų:
+
+std::vector:
+```
+std::vector atmintis buvo perskirstyta 27 kartų
+```
+
+Vector:
+```
+Vector atmintis buvo perskirstyta 27 kartų
+```
+
+Duomenų apdorojimas (milisekundėmis):
+
+| Vector                                   | 100000 | 1000000 | 10000000 |
+|------------------------------------------|--------|---------|----------|
+| Skaitymas iš failo:                      | 169    | 1965    | 23842    |
+| Skirstymas  į dvi grupes:                | 34     | 319     | 13412    |
+| Rūšiavimas didėjimo tvarka konteineryje: | 107    | 1410    | 22931    |
+| Viso:                                    | 310    | 3694    | 60185    |
+
+| std::vector                              | 100000 | 1000000 | 10000000 |
+|------------------------------------------|--------|---------|----------|
+| Skaitymas iš failo:                      | 189    | 1737    | 17837    |
+| Skirstymas  į dvi grupes:                | 30     | 272     | 4932     |
+| Rūšiavimas didėjimo tvarka konteineryje: | 182    | 2393    | 36037    |
+| Viso:                                    | 401    | 4402    | 58806    |
+
+
