@@ -3,7 +3,7 @@
 
 [Setup]
 ; Setup version info
-AppName=Dominykas-Mykolaitis
+AppName=VectorP
 AppVersion=1.5
 DefaultDirName={pf}\VU\Dominykas-Mykolaitis
 DefaultGroupName=VU\Dominykas-Mykolaitis
@@ -33,11 +33,11 @@ Source: "dokumentacija\*"; DestDir: "{app}\dokumentacija"; Flags: ignoreversion 
 
 [Icons]
 ; Create shortcuts
-Name: "{group}\Dominykas-Mykolaitis"; Filename: "{app}\tests.exe"
-Name: "{group}\Dominykas-Mykolaitis"; Filename: "{app}\vector.exe"
-Name: "{commondesktop}\Dominykas-Mykolaitis"; Filename: "{app}\tests.exe"
-Name: "{commondesktop}\Dominykas-Mykolaitis"; Filename: "{app}\vector.exe"
+Name: "{group}\VectorP"; Filename: "{app}\tests.exe"
+Name: "{group}\VectorP"; Filename: "{app}\vector.exe"
+Name: "{commondesktop}\VectorP"; Filename: "{app}\tests.exe"
+Name: "{commondesktop}\VectorP"; Filename: "{app}\vector.exe"
 
 [Run]
 ; Run the application after installation
-Filename: "{app}\tests.exe"; Description: "Launch Dominykas-Mykolaitis"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\tests.exe"; Description: "Launch VectorP"; Flags: nowait postinstall skipifsilent
